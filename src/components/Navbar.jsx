@@ -48,7 +48,7 @@ const Navbar = () => {
               onClick={() => {
                 // adicionar pagina de login
                 // openLinks("/login", true);
-                openLinks("/login", true);
+                openLinks("/login");
               }}
             >
               Login
@@ -77,7 +77,7 @@ const Navbar = () => {
             onClick={() => {
               // adicionar pagina de login
               // openLinks("/login", true);
-              openLinks("/login", true);
+              openLinks("/login");
             }}
           >
             Login
