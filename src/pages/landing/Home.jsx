@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../../components/Navbar";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -20,7 +20,7 @@ import {
   UserPen,
   CalendarClock,
 } from "lucide-react";
-import Footer from "../components/Footer";
+import Footer from "../../components/Footer";
 
 const Home = () => {
   const cardData = [
@@ -79,7 +79,10 @@ const Home = () => {
       <div>
         {/* HeroSection */}
         {/* <section className="relative flex flex-col min-h-screen max-w-screen overflow-hidden bg-[#111827]"> */}
-        <section className="flex flex-col min-h-screen max-w-screen bg-[#111827]">
+        <section
+          className="flex flex-col min-h-screen max-w-screen bg-[#111827]"
+          id="home"
+        >
           <Navbar />
 
           <div className=" flex flex-col items-center justify-center flex-1 text-white gap-6 z-10">
@@ -123,13 +126,18 @@ const Home = () => {
           </div>
         </section>
         {/* Demonstração visual do site website */}
-        <section className="h-screen bg-[#F3F4F6] flex flex-col items-center justify-center">
+        <section
+          className="h-screen bg-[#F3F4F6] flex flex-col items-center justify-center"
+          id="about"
+        >
           <p>Em construção</p>
           <p>Área de Demonstração de app</p>
         </section>
         {/* Agende já uma consulta */}
         {/* Footer Section */}
-        <Footer />
+        <section id="footer">
+          <Footer />
+        </section>
       </div>
     </>
   );

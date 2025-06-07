@@ -4,9 +4,9 @@ import { Button } from "./ui/button";
 
 const Footer = () => {
   const linkDataButtons = [
-    { name: "Home", href: "/" },
-    { name: "Funcionalidades", href: "/#functions" },
-    { name: "Preços", href: "" },
+    { name: "Home", href: "#home" },
+    { name: "Funcionalidades", href: "#functions" },
+    { name: "Preços", href: "/" },
   ];
   const contactDataButtons = [
     { name: "WhatsApp", href: "https://wa.me/55996676623" },

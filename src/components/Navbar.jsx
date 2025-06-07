@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { AlignJustify, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { openLinks } from "@/utils/openLinks";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navBarFunctions = [
-    { label: "Sobre", link: "/" },
-    { label: "Serviços", link: "/" },
-    { label: "Contato", link: "/" },
+    { label: "Sobre", link: "#about" },
+    { label: "Serviços", link: "#functions" },
+    { label: "Contato", link: "#footer" },
   ];
 
   return (
@@ -33,11 +34,25 @@ const Navbar = () => {
                   variant={"link"}
                   size={"sm"}
                   className={"text-white"}
+                  onClick={() => {
+                    openLinks(item.link);
+                  }}
                 >
                   {item.label}
                 </Button>
               );
             })}
+            <Button
+              variant={"destructive"}
+              className={"cursor-pointer"}
+              onClick={() => {
+                // adicionar pagina de login
+                // openLinks("/login", true);
+                openLinks("/login", true);
+              }}
+            >
+              Login
+            </Button>
           </div>
         )}
         {/* Menu Desktop */}
@@ -48,11 +63,25 @@ const Navbar = () => {
                 key={index}
                 variant={"link"}
                 className={"text-white cursor-pointer text-xl"}
+                onClick={() => {
+                  openLinks(item.link);
+                }}
               >
                 {item.label}
               </Button>
             );
           })}
+          <Button
+            variant={"destructive"}
+            className={"cursor-pointer"}
+            onClick={() => {
+              // adicionar pagina de login
+              // openLinks("/login", true);
+              openLinks("/login", true);
+            }}
+          >
+            Login
+          </Button>
         </div>
       </div>
     </>
