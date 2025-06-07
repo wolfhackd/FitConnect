@@ -10,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 ("use client");
 
 import * as React from "react";
+import { useState } from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -37,17 +38,33 @@ const items = [
 ];
 
 const Login = () => {
-  const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
+  const [tab, setTab] = useState("student");
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const academyId = formData.get("academy-id");
+    const accessId = formData.get("access-id");
+
+    console.log("Academia:", academyId);
+    console.log(`${tab === "student" ? "Aluno" : "Professor"} ID:`, accessId);
+  }
 
   return (
     <>
       <section className="flex items-center justify-center h-screen bg-[#111827]">
-        <Tabs defaultValue="student" className="w-[400px]">
+        <Tabs
+          defaultValue="student"
+          onValueChange={setTab}
+          className="w-[400px]"
+        >
           <TabsList>
             <TabsTrigger value="student">Aluno</TabsTrigger>
             <TabsTrigger value="teacher">Professor</TabsTrigger>
           </TabsList>
+          {/* teacher-id , student-id */}
           <Card>
             <CardHeader>
               <Popover open={open} onOpenChange={setOpen}>
@@ -71,7 +88,7 @@ const Login = () => {
                       className="h-9"
                     />
                     <CommandList>
-                      <CommandEmpty>No item found.</CommandEmpty>
+                      <CommandEmpty>Nenhum item encontrado.</CommandEmpty>
                       <CommandGroup>
                         {items.map((item) => (
                           <CommandItem
@@ -101,48 +118,61 @@ const Login = () => {
                 </PopoverContent>
               </Popover>
             </CardHeader>
+            {/* student */}
             <TabsContent value="student">
-              <CardHeader>
-                <CardTitle>Login Aluno</CardTitle>
-
-                <CardDescription>
-                  Digite seu cpf ou código de acesso para acessar seu treino.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="grid gap-6 mt-2">
-                <div className="grid gap-3">
-                  <Label htmlFor="teacher-id">CPF ou Código de Acesso</Label>
-                  <Input
-                    id="teacher-id"
-                    type="text"
-                    placeholder="000.000.000-00 ou código"
-                  />
-                </div>
-              </CardContent>
-              <CardFooter className={"mt-2 "}>
-                <Button className={"cursor-pointer"}>Acessar Painel</Button>
-              </CardFooter>
+              <form action="" method="post" onSubmit={handleSubmit}>
+                <input type="hidden" name="academy-id" value={value} />
+                <CardHeader>
+                  <CardTitle>Login Aluno</CardTitle>
+                  <CardDescription>
+                    Digite seu cpf ou código de acesso para acessar seu treino.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="grid gap-6 mt-2">
+                  <div className="grid gap-3">
+                    <Label htmlFor="access-id">CPF ou Código de Acesso</Label>
+                    <Input
+                      name="access-id"
+                      type="number"
+                      placeholder="000.000.000-00 ou código"
+                      required
+                    />
+                  </div>
+                </CardContent>
+                <CardFooter className={"mt-2 "}>
+                  <Button type="submit" className={"cursor-pointer"}>
+                    Acessar Painel
+                  </Button>
+                </CardFooter>
+              </form>
             </TabsContent>
+            {/* teacher */}
             <TabsContent value="teacher">
-              <CardHeader>
-                <CardTitle>Login do Professor</CardTitle>
-                <CardDescription>
-                  Digite seu CPF ou código de acesso para entrar no painel.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="grid gap-6 mt-2">
-                <div className="grid gap-3">
-                  <Label htmlFor="teacher-id">CPF ou Código de Acesso</Label>
-                  <Input
-                    id="teacher-id"
-                    type="text"
-                    placeholder="000.000.000-00 ou código"
-                  />
-                </div>
-              </CardContent>
-              <CardFooter className={"mt-2 "}>
-                <Button className={"cursor-pointer"}>Acessar Painel</Button>
-              </CardFooter>
+              <form action="" method="get" onSubmit={handleSubmit}>
+                <input type="hidden" name="academy-id" value={value} />
+                <CardHeader>
+                  <CardTitle>Login do Professor</CardTitle>
+                  <CardDescription>
+                    Digite seu CPF ou código de acesso para entrar no painel.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="grid gap-6 mt-2">
+                  <div className="grid gap-3">
+                    <Label htmlFor="access-id">CPF ou Código de Acesso</Label>
+                    <Input
+                      name="access-id"
+                      type="number"
+                      placeholder="000.000.000-00 ou código"
+                      required
+                    />
+                  </div>
+                </CardContent>
+                <CardFooter className={"mt-2 "}>
+                  <Button type="submit" className={"cursor-pointer"}>
+                    Acessar Painel
+                  </Button>
+                </CardFooter>
+              </form>
             </TabsContent>
           </Card>
         </Tabs>
