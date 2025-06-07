@@ -31,7 +31,7 @@ const Footer = () => {
     },
   ];
   return (
-    <div className="flex items-center justify-center gap-20 h-52 p-4">
+    <div className="flex flex-col lg:flex-row items-center justify-center md:gap-20 h-fit lg:h-52 p-4">
       <div className="flex flex-col items-center justify-center">
         <h4>Links úteis</h4>
         <Separator variant={"horizontal"} />
@@ -63,7 +63,7 @@ const Footer = () => {
       <div className="flex flex-col items-center justify-center">
         <h4>Redes sociais</h4>
         <Separator variant={"horizontal"} />
-        <div className="flex justify-center gap-4">
+        <div className="flex flex-col md:flex-row justify-center gap-4">
           {socialMediaLinks.map((link, index) => {
             return (
               <a href={link.href} key={index} target="_blank">
