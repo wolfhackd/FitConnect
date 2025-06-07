@@ -4,6 +4,11 @@ import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navBarFunctions = [
+    { label: "Sobre", link: "/" },
+    { label: "Serviços", link: "/" },
+    { label: "Contato", link: "/" },
+  ];
 
   return (
     <>
@@ -17,39 +22,37 @@ const Navbar = () => {
         >
           {!isOpen ? <AlignJustify /> : <X />}
         </Button>
+        {/* Menu Smartphone */}
         {isOpen && (
           <div className="flex flex-col gap-6 fixed top-10 h-screen w-screen pt-6 bg-[#1F2937]">
             {/* tenho que adicionar os links */}
-            <Button variant={"link"} size={"sm"} className={" text-white"}>
-              Sobre
-            </Button>
-            <Button variant={"link"} size={"sm"} className={" text-white"}>
-              Benefícios
-            </Button>
-            <Button variant={"link"} size={"sm"} className={" text-white"}>
-              Contato
-            </Button>
+            {navBarFunctions.map((item, index) => {
+              return (
+                <Button
+                  key={index}
+                  variant={"link"}
+                  size={"sm"}
+                  className={"text-white"}
+                >
+                  {item.label}
+                </Button>
+              );
+            })}
           </div>
         )}
+        {/* Menu Desktop */}
         <div className="hidden md:flex items-center md:justify-between lg:justify-center gap-6 pr-2 w-2/4">
-          <Button
-            variant={"link"}
-            className={"text-white cursor-pointer text-xl"}
-          >
-            Sobre
-          </Button>
-          <Button
-            variant={"link"}
-            className={"text-white cursor-pointer text-xl"}
-          >
-            Benefícios
-          </Button>
-          <Button
-            variant={"link"}
-            className={"text-white cursor-pointer text-xl"}
-          >
-            Contato
-          </Button>
+          {navBarFunctions.map((item, index) => {
+            return (
+              <Button
+                key={index}
+                variant={"link"}
+                className={"text-white cursor-pointer text-xl"}
+              >
+                {item.label}
+              </Button>
+            );
+          })}
         </div>
       </div>
     </>
