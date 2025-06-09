@@ -69,7 +69,7 @@ const Login = () => {
       userType: userType,
     };
     if (academyId === "" || accessId === "") {
-      toast.error("Campos obrigatórios vazios");
+      toast("Campos obrigatórios vazios");
       return;
     }
     if (!/^\d+$/.test(accessId)) {
@@ -168,18 +168,16 @@ const Login = () => {
                 <CardHeader>
                   <CardTitle>Login do Aluno</CardTitle>
                   <CardDescription>
-                    Digite seu CPF ou código de acesso para acessar seu treino.
+                    Digite seu CPF para acessar seu treino.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="grid gap-6 mt-2">
                   <div className="grid gap-3">
-                    <Label htmlFor="accessId">CPF ou Código de Acesso</Label>
+                    <Label htmlFor="accessId">CPF</Label>
                     <Input
                       name="accessId"
-                      type="text"
-                      pattern="\d*"
-                      inputMode="numeric"
-                      placeholder="000.000.000-00 ou código"
+                      type="number"
+                      placeholder="Digite o CPF sem pontuação"
                       required
                     />
                   </div>
@@ -202,18 +200,16 @@ const Login = () => {
                 <CardHeader>
                   <CardTitle>Login do Professor</CardTitle>
                   <CardDescription>
-                    Digite seu CPF ou código de acesso para entrar no painel.
+                    Digite seu CPF para entrar no painel.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="grid gap-6 mt-2">
                   <div className="grid gap-3">
-                    <Label htmlFor="accessId">CPF ou Código de Acesso</Label>
+                    <Label htmlFor="accessId">CPF</Label>
                     <Input
                       name="accessId"
-                      type="text"
-                      pattern="\d*"
-                      inputMode="numeric"
-                      placeholder="000.000.000-00 ou código"
+                      type="number"
+                      placeholder="Digite o CPF sem pontuação"
                       required
                     />
                   </div>
