@@ -1,4 +1,6 @@
-const { PrismaClient } = require("../../prisma/generated/prisma");
+const { PrismaClient } = require("../../../prisma/generated/prisma");
+const authMiddleware = require("../../middleware/auth");
+const typeOfUser = require("../../middleware/typeOfUser");
 const router = require("express").Router();
 const prisma = new PrismaClient();
 
@@ -11,7 +13,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/create", async (req, res) => {
+router.post("/create", authMiddleware, typeOfUser(1), async (req, res) => {
   try {
     const newAcademy = await prisma.academy.create({
       data: {
@@ -26,7 +28,7 @@ router.post("/create", async (req, res) => {
   }
 });
 
-router.post("/listusers", async (req, res) => {
+router.post("/listusers", authMiddleware, typeOfUser(1), async (req, res) => {
   try {
     const users = await prisma.academy.findUnique({
       where: {
@@ -44,7 +46,7 @@ router.post("/listusers", async (req, res) => {
   }
 });
 
-router.post("/createuser", async (req, res) => {
+router.post("/createuser", authMiddleware, typeOfUser(1), async (req, res) => {
   try {
     const newUser = await prisma.user.create({
       data: {
@@ -52,6 +54,7 @@ router.post("/createuser", async (req, res) => {
         cpf: req.body.cpf,
         age: req.body.age, //numero inteiro
         yearOfBirth: req.body.yearOfBirth, //numero inteiro
+        userType: req.body.userType ?? 0,
         academies: {
           connect: {
             id: req.body.id, // ID da academia que você deseja associar

@@ -1,10 +1,11 @@
 const jwt = require("jsonwebtoken");
-const { PrismaClient } = require("../../prisma/generated/prisma");
+const { PrismaClient } = require("../../../prisma/generated/prisma");
 const prisma = new PrismaClient();
 require("dotenv").config();
 const router = require("express").Router();
 
 const SECRET = process.env.JWT_SECRET;
+const REFRESH_SECRET = process.env.JWT_SECRET_REFRESH;
 
 router.post("/", async (req, res) => {
   try {
@@ -19,21 +20,38 @@ router.post("/", async (req, res) => {
     if (userType !== 0 && userType !== 1) {
       return res.status(400).json({ message: "Tipo de usuário inválido" });
     }
-    if (accessId && accessId.length == 11) {
+    if (accessId && accessId.length < 11) {
       return res.status(400).json({ message: "CPF ou código muito curto" });
     }
     const user = await prisma.user.findFirst({
       where: {
-        academyId: academyId,
         cpf: accessId,
         userType: userType,
+        academies: {
+          some: {
+            id: academyId,
+          },
+        },
       },
     });
     if (!user) {
       return res.status(400).json({ message: "Usuário não encontrado" });
     }
 
-    res.json({ message: "Login realizado com sucesso" });
+    const accessToken = jwt.sign(user, SECRET, { expiresIn: "15m" });
+    const refreshToken = jwt.sign(user, REFRESH_SECRET, { expiresIn: "7d" });
+    //area de teste
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: true, // só via HTTPS em produção
+      sameSite: "Strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    res.json({
+      message: "Login realizado com sucesso",
+      accessToken,
+    });
   } catch (err) {
     res
       .status(500)
