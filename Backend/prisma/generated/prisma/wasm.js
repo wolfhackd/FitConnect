@@ -133,6 +133,7 @@ exports.Prisma.UserScalarFieldEnum = {
   cpf: 'cpf',
   age: 'age',
   yearOfBirth: 'yearOfBirth',
+  userType: 'userType',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

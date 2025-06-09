@@ -64,9 +64,12 @@ router.post("/createuser", async (req, res) => {
       newUser,
     });
   } catch (err) {
-    res
-      .status(500)
-      .json({ error: "Erro ao criar usuario", details: err.message });
+    if (err.code === "P2002" && err.meta && err.meta.target.includes("cpf")) {
+      return res
+        .status(409)
+        .json({ message: "Usuário com esse CPF já existe" });
+    }
+    res.status(500).json({ message: "Erro ao criar usuario" });
   }
 });
 

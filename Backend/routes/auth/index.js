@@ -1,0 +1,44 @@
+const jwt = require("jsonwebtoken");
+const { PrismaClient } = require("../../prisma/generated/prisma");
+const prisma = new PrismaClient();
+require("dotenv").config();
+const router = require("express").Router();
+
+const SECRET = process.env.JWT_SECRET;
+
+router.post("/", async (req, res) => {
+  try {
+    const { academyId, accessId, userType } = req.body;
+
+    if (!academyId) {
+      return res.status(400).json({ message: "Academia não informada." });
+    }
+    if (!accessId) {
+      return res.status(400).json({ message: "CPF ou código não informado" });
+    }
+    if (userType !== 0 && userType !== 1) {
+      return res.status(400).json({ message: "Tipo de usuário inválido" });
+    }
+    if (accessId && accessId.length == 11) {
+      return res.status(400).json({ message: "CPF ou código muito curto" });
+    }
+    const user = await prisma.user.findFirst({
+      where: {
+        academyId: academyId,
+        cpf: accessId,
+        userType: userType,
+      },
+    });
+    if (!user) {
+      return res.status(400).json({ message: "Usuário não encontrado" });
+    }
+
+    res.json({ message: "Login realizado com sucesso" });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Erro ao realizar login", error: err.message });
+  }
+});
+
+module.exports = router;
