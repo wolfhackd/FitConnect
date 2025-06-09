@@ -31,19 +31,26 @@ import {
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Toaster, toast } from "sonner";
 
 const Login = () => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   const [tab, setTab] = useState("student");
   const [items, setItems] = useState([]);
+  const [error, setError] = useState(false); //Vou usar o sonner para exibir os erros
+  // Lidando com os erros
+  React.useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   React.useEffect(() => {
     axios
-      .get("http://localhost:3000/login/academy")
+      .get("http://localhost:3000/academy")
       .then((response) => {
         const academies = response.data;
-        console.log(academies);
         const formatedItems = academies.map((item) => ({
           value: item.id,
           label: item.name,
@@ -52,21 +59,47 @@ const Login = () => {
       })
       .catch((err) => {
         console.log(err);
+        setError("Erro ao buscar academias");
       });
   }, []);
 
-  function handleSubmit(event) {
+  function handleSubmit(event, tab) {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const academyId = formData.get("academy-id");
-    const accessId = formData.get("access-id");
+    const academyId = formData.get("academyId");
+    const accessId = formData.get("accessId");
+    const userType = tab === "student" ? 0 : 1;
 
-    console.log("Academia:", academyId);
-    console.log(`${tab === "student" ? "Aluno" : "Professor"} ID:`, accessId);
+    const payload = {
+      academyId: academyId,
+      accessId: accessId,
+      userType: userType,
+    };
+    if (academyId === "" || accessId === "") {
+      setError("Campos obrigatórios vazios");
+      return;
+    }
+    if (!/^\d+$/.test(accessId)) {
+      toast.error("Digite apenas números no campo de acesso.");
+      return;
+    }
+
+    axios
+      .post("http://localhost:3000/login", payload)
+      .then((response) => {
+        if (response.status === 400) {
+          setError(response.data.message);
+        }
+        console.log(response.data);
+      })
+      .catch((err) => {
+        setError(err.response.data.message);
+      });
   }
 
   return (
     <>
+      <Toaster position="top-center" />
       <section className="flex items-center justify-center h-screen bg-[#111827]">
         <Tabs
           defaultValue="student"
@@ -133,8 +166,12 @@ const Login = () => {
             </CardHeader>
             {/* student */}
             <TabsContent value="student">
-              <form action="" method="post" onSubmit={handleSubmit}>
-                <input type="hidden" name="academy-id" value={value} />
+              <form
+                action=""
+                method="post"
+                onSubmit={(e) => handleSubmit(e, tab)}
+              >
+                <input type="hidden" name="academyId" value={value} />
                 <CardHeader>
                   <CardTitle>Login do Aluno</CardTitle>
                   <CardDescription>
@@ -143,10 +180,12 @@ const Login = () => {
                 </CardHeader>
                 <CardContent className="grid gap-6 mt-2">
                   <div className="grid gap-3">
-                    <Label htmlFor="access-id">CPF ou Código de Acesso</Label>
+                    <Label htmlFor="accessId">CPF ou Código de Acesso</Label>
                     <Input
-                      name="access-id"
-                      type="number"
+                      name="accessId"
+                      type="text"
+                      pattern="\d*"
+                      inputMode="numeric"
                       placeholder="000.000.000-00 ou código"
                       required
                     />
@@ -161,8 +200,12 @@ const Login = () => {
             </TabsContent>
             {/* teacher */}
             <TabsContent value="teacher">
-              <form action="" method="get" onSubmit={handleSubmit}>
-                <input type="hidden" name="academy-id" value={value} />
+              <form
+                action=""
+                method="get"
+                onSubmit={(e) => handleSubmit(e, tab)}
+              >
+                <input type="hidden" name="academyId" value={value} />
                 <CardHeader>
                   <CardTitle>Login do Professor</CardTitle>
                   <CardDescription>
@@ -171,10 +214,12 @@ const Login = () => {
                 </CardHeader>
                 <CardContent className="grid gap-6 mt-2">
                   <div className="grid gap-3">
-                    <Label htmlFor="access-id">CPF ou Código de Acesso</Label>
+                    <Label htmlFor="accessId">CPF ou Código de Acesso</Label>
                     <Input
-                      name="access-id"
-                      type="number"
+                      name="accessId"
+                      type="text"
+                      pattern="\d*"
+                      inputMode="numeric"
                       placeholder="000.000.000-00 ou código"
                       required
                     />
