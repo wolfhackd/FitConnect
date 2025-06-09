@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   Card,
   CardContent,
@@ -30,17 +31,29 @@ import {
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-const items = [
-  {
-    value: "teste",
-    label: "G4",
-  },
-];
 
 const Login = () => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   const [tab, setTab] = useState("student");
+  const [items, setItems] = useState([]);
+
+  React.useEffect(() => {
+    axios
+      .get("http://localhost:3000/login/academy")
+      .then((response) => {
+        const academies = response.data;
+        console.log(academies);
+        const formatedItems = academies.map((item) => ({
+          value: item.id,
+          label: item.name,
+        }));
+        setItems(formatedItems);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -123,9 +136,9 @@ const Login = () => {
               <form action="" method="post" onSubmit={handleSubmit}>
                 <input type="hidden" name="academy-id" value={value} />
                 <CardHeader>
-                  <CardTitle>Login Aluno</CardTitle>
+                  <CardTitle>Login do Aluno</CardTitle>
                   <CardDescription>
-                    Digite seu cpf ou código de acesso para acessar seu treino.
+                    Digite seu CPF ou código de acesso para acessar seu treino.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="grid gap-6 mt-2">
