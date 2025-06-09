@@ -38,13 +38,6 @@ const Login = () => {
   const [value, setValue] = useState("");
   const [tab, setTab] = useState("student");
   const [items, setItems] = useState([]);
-  const [error, setError] = useState(false); //Vou usar o sonner para exibir os erros
-  // Lidando com os erros
-  React.useEffect(() => {
-    if (error) {
-      toast.error(error);
-    }
-  }, [error]);
 
   React.useEffect(() => {
     axios
@@ -58,8 +51,8 @@ const Login = () => {
         setItems(formatedItems);
       })
       .catch((err) => {
-        console.log(err);
-        setError("Erro ao buscar academias");
+        console.log(err.response.data.message);
+        toast.error("Erro ao buscar academias");
       });
   }, []);
 
@@ -76,7 +69,7 @@ const Login = () => {
       userType: userType,
     };
     if (academyId === "" || accessId === "") {
-      setError("Campos obrigatórios vazios");
+      toast.error("Campos obrigatórios vazios");
       return;
     }
     if (!/^\d+$/.test(accessId)) {
@@ -88,12 +81,12 @@ const Login = () => {
       .post("http://localhost:3000/login", payload)
       .then((response) => {
         if (response.status === 400) {
-          setError(response.data.message);
+          toast.error(response.data.message);
         }
         console.log(response.data);
       })
       .catch((err) => {
-        setError(err.response.data.message);
+        toast.error(err.response.data.message);
       });
   }
 
