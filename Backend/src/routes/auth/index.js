@@ -40,7 +40,7 @@ router.post("/", async (req, res) => {
 
     const accessToken = jwt.sign(user, SECRET);
     const refreshToken = jwt.sign(user, REFRESH_SECRET);
-    //area de teste
+
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
       secure: true,
@@ -52,7 +52,7 @@ router.post("/", async (req, res) => {
       httpOnly: true,
       secure: true,
       sameSite: "Strict",
-      maxAge: 1 * 60 * 1000,
+      maxAge: 15 * 60 * 1000,
     });
     res.json({ message: "Login realizado com sucesso" });
   } catch (err) {

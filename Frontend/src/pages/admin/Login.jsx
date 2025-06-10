@@ -32,6 +32,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Toaster, toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [open, setOpen] = useState(false);
@@ -39,6 +40,7 @@ const Login = () => {
   const [tab, setTab] = useState("student");
   const [items, setItems] = useState([]);
 
+  const navigate = useNavigate();
   React.useEffect(() => {
     axios
       .get("http://localhost:3000/academy")
@@ -78,12 +80,13 @@ const Login = () => {
     }
 
     axios
-      .post("http://localhost:3000/login", payload)
+      .post("http://localhost:3000/login", payload, { withCredentials: true })
       .then((response) => {
         if (response.status === 400) {
           toast.error(response.data.message);
         }
         console.log(response.data);
+        navigate("/index");
       })
       .catch((err) => {
         toast.error(err.response.data.message);
