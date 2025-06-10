@@ -38,20 +38,23 @@ router.post("/", async (req, res) => {
       return res.status(400).json({ message: "Usuário não encontrado" });
     }
 
-    const accessToken = jwt.sign(user, SECRET, { expiresIn: "15m" });
-    const refreshToken = jwt.sign(user, REFRESH_SECRET, { expiresIn: "7d" });
+    const accessToken = jwt.sign(user, SECRET);
+    const refreshToken = jwt.sign(user, REFRESH_SECRET);
     //area de teste
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: true, // só via HTTPS em produção
+      secure: true,
       sameSite: "Strict",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    res.json({
-      message: "Login realizado com sucesso",
-      accessToken,
+    res.cookie("accessToken", accessToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "Strict",
+      maxAge: 1 * 60 * 1000,
     });
+    res.json({ message: "Login realizado com sucesso" });
   } catch (err) {
     res
       .status(500)
