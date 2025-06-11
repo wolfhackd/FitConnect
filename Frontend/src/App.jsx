@@ -1,19 +1,18 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/landing/Home";
-import Login from "./pages/admin/Login";
+import Login from "./pages/Login";
 import "./index.css";
 import PrivateRoute from "./middleware/PrivateRouter";
-import Index from "./pages";
+import Dashboard from "./pages/admin/Dashboard";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
-        <Route element={<PrivateRoute />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/index" element={<Index />} />
-        </Route>
+        <Route path="/" element={<Home />} />
+        <Route element={<PrivateRoute />}></Route>
       </Routes>
     </BrowserRouter>
   );
