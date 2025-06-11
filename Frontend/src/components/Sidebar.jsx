@@ -1,5 +1,6 @@
 import {
   Tooltip,
+  TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@radix-ui/react-tooltip";
@@ -52,6 +53,13 @@ const Sidebar = () => {
                       <icon.Icon className="size-6" />
                     </Button>
                   </TooltipTrigger>
+                  <TooltipContent
+                    side="right"
+                    align="center"
+                    className="bg-white rounded-md p-2"
+                  >
+                    {icon.label}
+                  </TooltipContent>
                 </Tooltip>
               </nav>
             );
