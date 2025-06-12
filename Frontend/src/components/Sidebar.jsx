@@ -21,7 +21,10 @@ const AcademyIcon = () => {
 const Sidebar = () => {
   const pathname = window.location.pathname;
 
-  const icons = [{ Icon: ChartArea, label: "Imagens", href: "/dashboard" }];
+  const icons = [
+    { Icon: ChartArea, label: "Imagens", href: "/dashboard" },
+    { Icon: ChartArea, label: "Imagens", href: "/#" },
+  ];
 
   return (
     <TooltipProvider>

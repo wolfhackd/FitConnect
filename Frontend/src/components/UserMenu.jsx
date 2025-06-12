@@ -3,9 +3,11 @@ import { Separator } from "@radix-ui/react-separator";
 import { LogOut, User } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Button } from "./ui/button";
+import { useNavigate } from "react-router-dom";
 
 const UserMenu = () => {
   const [currentDate, setCurrentDate] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const updateTime = () => {
@@ -26,6 +28,15 @@ const UserMenu = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  const handleLogout = async () => {
+    await fetch("/logout", {
+      method: "POST",
+      credentials: "include",
+    });
+    navigate("/login");
+  };
+
   return (
     <div className="flex items-center justify-around w-full bg-white p-4">
       <p className=" w-full">Overview</p>
@@ -56,6 +67,7 @@ const UserMenu = () => {
           </AvatarFallback>
         </Avatar>
         <Button
+          onClick={handleLogout}
           title="Logout"
           className={"rounded-full size-10 bg-[#EF4444] cursor-pointer"}
         >

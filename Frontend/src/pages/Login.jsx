@@ -85,8 +85,11 @@ const Login = () => {
         if (response.status === 400) {
           toast.error(response.data.message);
         }
-        console.log(response.data);
-        navigate("/index");
+        if (response.data.userType === 0) {
+          navigate("/he");
+        } else if (response.data.userType === 1) {
+          navigate("/dashboard");
+        }
       })
       .catch((err) => {
         toast.error(err.response.data.message);
