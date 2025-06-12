@@ -1,11 +1,14 @@
 import React from "react";
 import Sidebar from "@/components/Sidebar";
+import UserMenu from "@/components/UserMenu";
 
 const Dashboard = () => {
   return (
-    <div className="bg-[#E5E7EB] w-screen flex">
+    <div className="w-screen flex">
       <Sidebar />
-      <p>asdasd</p>
+      <section className="flex-1 bg-[#E5E7EB] p-6">
+        <UserMenu />
+      </section>
     </div>
   );
 };

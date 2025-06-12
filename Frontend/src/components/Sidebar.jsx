@@ -4,15 +4,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@radix-ui/react-tooltip";
-import {
-  Dumbbell,
-  ImageIcon,
-  ClockIcon,
-  CalendarIcon,
-  MessageSquareIcon,
-  StarIcon,
-  FileTextIcon,
-} from "lucide-react";
+import { Dumbbell, ChartArea } from "lucide-react";
 import React from "react";
 import { Button } from "./ui/button";
 
@@ -27,27 +19,26 @@ const AcademyIcon = () => {
 //Fazer uma função para quando clicar no item ele fica vermelho e na sua pagina
 
 const Sidebar = () => {
-  const icons = [
-    { Icon: ImageIcon, label: "Imagens" },
-    { Icon: ClockIcon, label: "Recentes" },
-    { Icon: CalendarIcon, label: "Calendário" },
-    { Icon: MessageSquareIcon, label: "Mensagens" },
-    { Icon: StarIcon, label: "Favoritos" },
-    { Icon: FileTextIcon, label: "Documentos" },
-  ];
+  const pathname = window.location.pathname;
+
+  const icons = [{ Icon: ChartArea, label: "Imagens", href: "/dashboard" }];
+
   return (
     <TooltipProvider>
       <div className="bg-white p-4 h-screen w-18 flex flex-col items-center gap-6">
         <AcademyIcon />
         <nav className="flex flex-col gap-1">
           {icons.map((icon, index) => {
+            const isActive = pathname === icon.href;
             return (
               <nav>
                 <Tooltip key={index}>
                   <TooltipTrigger>
                     <Button
                       variant="ghost"
-                      className="hover:bg-gray-100 text-black size-12 hover:text-[#EF4444] cursor-pointer"
+                      className={`hover:bg-gray-100 size-12 hover:text-[#EF4444] cursor-pointer ${
+                        isActive ? "text-[#EF4444]" : "text-black"
+                      }`}
                       aria-label={icon.label}
                     >
                       <icon.Icon className="size-6" />
