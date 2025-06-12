@@ -13,14 +13,6 @@ export default function PrivateRoute({ allowedTypes = [] }) {
         withCredentials: true,
       })
       .then((res) => {
-        // console.log("Rota atual:", location.pathname);
-        // console.log(
-        //   "userType tipo:",
-        //   typeof res.data?.user?.userType,
-        //   "valor:",
-        //   res.data?.user?.userType
-        // );
-        // console.log("allowedTypes:", allowedTypes);
         const userType = res.data?.user?.userType;
         if (!allowedTypes.includes(userType)) {
           setUnauthorized(true);
@@ -30,7 +22,7 @@ export default function PrivateRoute({ allowedTypes = [] }) {
       })
 
       .catch(() => {
-        setAuth(false); // Não autenticado
+        setAuth(false);
       })
       .finally(() => setLoading(false));
   }, [allowedTypes]);
