@@ -54,7 +54,7 @@ router.post("/", async (req, res) => {
       sameSite: "Strict",
       maxAge: 15 * 60 * 1000,
     });
-    res.json({ message: "Login realizado com sucesso" });
+    res.json({ message: "Login realizado com sucesso", userType: userType });
   } catch (err) {
     res
       .status(500)
