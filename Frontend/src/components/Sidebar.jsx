@@ -34,9 +34,9 @@ const Sidebar = () => {
           {icons.map((icon, index) => {
             const isActive = pathname === icon.href;
             return (
-              <nav>
-                <Tooltip key={index}>
-                  <TooltipTrigger>
+              <nav key={index}>
+                <Tooltip>
+                  <TooltipTrigger asChild>
                     <Button
                       variant="ghost"
                       className={`hover:bg-gray-100 size-12 hover:text-[#EF4444] cursor-pointer ${

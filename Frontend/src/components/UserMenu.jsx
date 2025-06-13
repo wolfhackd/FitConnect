@@ -1,9 +1,10 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { Separator } from "@radix-ui/react-separator";
-import { LogOut, User } from "lucide-react";
+import { LockIcon, LogOut, User } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { useNavigate } from "react-router-dom";
+import ButtonFunctions from "./ButtonFunctions";
 
 const UserMenu = () => {
   const [currentDate, setCurrentDate] = useState("");
@@ -23,9 +24,7 @@ const UserMenu = () => {
     };
 
     updateTime();
-
     const interval = setInterval(updateTime, 1000);
-
     return () => clearInterval(interval);
   }, []);
 
@@ -37,39 +36,63 @@ const UserMenu = () => {
     navigate("/login");
   };
 
+  const buttons = [
+    {
+      icon: LockIcon,
+      label: "Liberar Acesso",
+      color: "bg-[#111827]",
+    },
+    {
+      icon: LockIcon,
+      label: "Liberar Acesso",
+      color: "bg-[#111827]",
+    },
+    {
+      icon: LockIcon,
+      label: "Liberar Acesso",
+      color: "bg-[#111827]",
+    },
+  ];
+
   return (
-    <div className="flex items-center justify-around w-full bg-white p-4">
-      <p className=" w-full">Overview</p>
-      <Separator
-        orientation="vertical"
-        className="mx-4 w-px h-12 bg-gray-300"
-      />
-      <div className=" w-full">
-        <p>{currentDate}</p>
-      </div>
-      <Separator
-        orientation="vertical"
-        className="mx-4 w-px h-12 bg-gray-300"
-      />
-      <div className="flex items-center justify-around w-full">
-        <p>Bem vindo Maysa.</p>
-        <Avatar>
-          <AvatarImage
-            src="https://github.com/shadcn.png"
-            alt="Avatar img"
-            className="rounded-full w-10 h-10"
+    <div className="flex items-center justify-between w-full bg-white p-4 rounded-xl shadow-sm">
+      {/* Botões */}
+      <div className="flex items-center gap-4">
+        {buttons.map((button, index) => (
+          <ButtonFunctions
+            key={button.label + index}
+            icon={button.icon}
+            label={button.label}
+            color={`rounded-lg px-4 py-2 shadow-sm border text-white hover:text-[#EF4444] hover:ring-2 hover:ring-[#EF4444] transition-all duration-200 ${button.color}`}
           />
-          <AvatarFallback>
-            <User
+        ))}
+      </div>
+
+      {/* Data e Separador */}
+      <div className="flex items-center gap-6">
+        <p className="text-sm text-gray-500">{currentDate}</p>
+        <Separator orientation="vertical" className="h-10 w-px bg-gray-300" />
+      </div>
+
+      {/* Avatar + Logout */}
+      <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
+          <p className="text-gray-800 font-medium">Bem-vinda, Professor</p>
+          <Avatar>
+            <AvatarImage
+              src="https://github.com/shadcn.png"
               alt="Avatar img"
-              className="rounded-full size-10 bg-[#EF4444] "
+              className="rounded-full w-10 h-10"
             />
-          </AvatarFallback>
-        </Avatar>
+            <AvatarFallback>
+              <User className="rounded-full size-10 bg-gray-200 text-gray-600" />
+            </AvatarFallback>
+          </Avatar>
+        </div>
         <Button
           onClick={handleLogout}
           title="Logout"
-          className={"rounded-full size-10 bg-[#EF4444] cursor-pointer"}
+          className="rounded-full size-10 bg-red-500 hover:bg-red-600 text-white p-2"
         >
           <LogOut />
         </Button>
