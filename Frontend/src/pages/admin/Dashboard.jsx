@@ -1,8 +1,7 @@
 import React from "react";
 import Sidebar from "@/components/Sidebar";
 import UserMenu from "@/components/UserMenu";
-import ButtonFunctions from "@/components/ButtonFunctions";
-import OnlineRequestsCard from "@/components/OnlineRequestsCard";
+import GraphCircleCard from "@/components/GraphCircleCardStudents";
 
 const Dashboard = () => {
   return (
@@ -11,7 +10,7 @@ const Dashboard = () => {
       <section className="flex-1 bg-[#E5E7EB] p-8">
         <UserMenu />
 
-        <OnlineRequestsCard className="w-1/3" />
+        <GraphCircleCard className="w-1/3" />
       </section>
     </div>
   );

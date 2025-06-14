@@ -92,7 +92,7 @@ const UserMenu = () => {
         <Button
           onClick={handleLogout}
           title="Logout"
-          className="rounded-full size-10 bg-red-500 hover:bg-red-600 text-white p-2"
+          className="rounded-full size-10 bg-red-500 hover:bg-red-600 text-white p-2 cursor-pointer"
         >
           <LogOut />
         </Button>

@@ -1,19 +1,21 @@
+import { User } from "lucide-react";
 import { PieChart, Pie, Cell } from "recharts";
 
+//Tenho que puxar do banco de dados e adicionar uma propriedade em cada aluno lá
 const data = [
-  { name: "New", value: 5900 },
-  { name: "Returning", value: 3100 },
+  { name: "Ativos", value: 5900 },
+  { name: "Inativos", value: 3100 },
 ];
 
-const COLORS = ["#3b82f6", "#e5e7eb"]; // Azul e cinza claro
+const COLORS = ["#EF4444", "#E5E7EB"];
 
 const total = data.reduce((sum, item) => sum + item.value, 0);
 
-const OnlineRequestsCard = () => {
+const GraphCircleCardStudents = () => {
   return (
     <div className="bg-white shadow-md rounded-xl p-4 w-64 text-center mt-6">
       <h2 className="text-sm font-semibold text-gray-600 mb-2">
-        Online Requests
+        Total de Alunos
       </h2>
 
       <div className="relative flex justify-center items-center">
@@ -24,7 +26,7 @@ const OnlineRequestsCard = () => {
             startAngle={90}
             endAngle={-270}
             innerRadius={50}
-            outerRadius={70}
+            outerRadius={55}
             stroke="none"
           >
             {data.map((entry, index) => (
@@ -34,28 +36,28 @@ const OnlineRequestsCard = () => {
         </PieChart>
 
         <div className="absolute flex flex-col items-center justify-center">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/190/190411.png"
-            alt="icon"
-            className="w-6 h-6 mb-1"
-          />
+          <User />
           <p className="text-xl font-bold">{total.toLocaleString()}</p>
-          <p className="text-xs text-gray-500">Requests</p>
+          {/* <p className="text-xs text-gray-500">Total</p> */}
         </div>
       </div>
 
       <div className="mt-3 flex justify-around text-xs text-gray-500">
         <div className="flex items-center space-x-1">
-          <div className="w-2 h-2 rounded-full bg-blue-500" />
-          <span>New: 5.9k</span>
+          <div className="w-2 h-2 rounded-full bg-[#EF4444]" />
+          <span>
+            {data[0].name}: {data[0].value}
+          </span>
         </div>
         <div className="flex items-center space-x-1">
           <div className="w-2 h-2 rounded-full bg-gray-300" />
-          <span>Returning: 3.1k</span>
+          <span>
+            {data[1].name}: {data[0].value}
+          </span>
         </div>
       </div>
     </div>
   );
 };
 
-export default OnlineRequestsCard;
+export default GraphCircleCardStudents;
