@@ -33,6 +33,7 @@ const UserMenu = () => {
       method: "POST",
       credentials: "include",
     });
+    localStorage.removeItem("academyId");
     navigate("/login");
   };
 

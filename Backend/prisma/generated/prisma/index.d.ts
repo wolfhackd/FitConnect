@@ -2093,12 +2093,14 @@ export namespace Prisma {
   export type UserAvgAggregateOutputType = {
     age: number | null
     yearOfBirth: number | null
+    status: number | null
     userType: number | null
   }
 
   export type UserSumAggregateOutputType = {
     age: number | null
     yearOfBirth: number | null
+    status: number | null
     userType: number | null
   }
 
@@ -2108,6 +2110,7 @@ export namespace Prisma {
     cpf: string | null
     age: number | null
     yearOfBirth: number | null
+    status: number | null
     userType: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2119,6 +2122,7 @@ export namespace Prisma {
     cpf: string | null
     age: number | null
     yearOfBirth: number | null
+    status: number | null
     userType: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2130,6 +2134,7 @@ export namespace Prisma {
     cpf: number
     age: number
     yearOfBirth: number
+    status: number
     userType: number
     createdAt: number
     updatedAt: number
@@ -2140,12 +2145,14 @@ export namespace Prisma {
   export type UserAvgAggregateInputType = {
     age?: true
     yearOfBirth?: true
+    status?: true
     userType?: true
   }
 
   export type UserSumAggregateInputType = {
     age?: true
     yearOfBirth?: true
+    status?: true
     userType?: true
   }
 
@@ -2155,6 +2162,7 @@ export namespace Prisma {
     cpf?: true
     age?: true
     yearOfBirth?: true
+    status?: true
     userType?: true
     createdAt?: true
     updatedAt?: true
@@ -2166,6 +2174,7 @@ export namespace Prisma {
     cpf?: true
     age?: true
     yearOfBirth?: true
+    status?: true
     userType?: true
     createdAt?: true
     updatedAt?: true
@@ -2177,6 +2186,7 @@ export namespace Prisma {
     cpf?: true
     age?: true
     yearOfBirth?: true
+    status?: true
     userType?: true
     createdAt?: true
     updatedAt?: true
@@ -2275,6 +2285,7 @@ export namespace Prisma {
     cpf: string
     age: number
     yearOfBirth: number
+    status: number
     userType: number
     createdAt: Date
     updatedAt: Date
@@ -2305,6 +2316,7 @@ export namespace Prisma {
     cpf?: boolean
     age?: boolean
     yearOfBirth?: boolean
+    status?: boolean
     userType?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2318,6 +2330,7 @@ export namespace Prisma {
     cpf?: boolean
     age?: boolean
     yearOfBirth?: boolean
+    status?: boolean
     userType?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2329,6 +2342,7 @@ export namespace Prisma {
     cpf?: boolean
     age?: boolean
     yearOfBirth?: boolean
+    status?: boolean
     userType?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2340,12 +2354,13 @@ export namespace Prisma {
     cpf?: boolean
     age?: boolean
     yearOfBirth?: boolean
+    status?: boolean
     userType?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "cpf" | "age" | "yearOfBirth" | "userType" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "cpf" | "age" | "yearOfBirth" | "status" | "userType" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     academies?: boolean | User$academiesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -2364,6 +2379,7 @@ export namespace Prisma {
       cpf: string
       age: number
       yearOfBirth: number
+      status: number
       userType: number
       createdAt: Date
       updatedAt: Date
@@ -2796,6 +2812,7 @@ export namespace Prisma {
     readonly cpf: FieldRef<"User", 'String'>
     readonly age: FieldRef<"User", 'Int'>
     readonly yearOfBirth: FieldRef<"User", 'Int'>
+    readonly status: FieldRef<"User", 'Int'>
     readonly userType: FieldRef<"User", 'Int'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
@@ -3259,6 +3276,7 @@ export namespace Prisma {
     cpf: 'cpf',
     age: 'age',
     yearOfBirth: 'yearOfBirth',
+    status: 'status',
     userType: 'userType',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -3406,6 +3424,7 @@ export namespace Prisma {
     cpf?: StringFilter<"User"> | string
     age?: IntFilter<"User"> | number
     yearOfBirth?: IntFilter<"User"> | number
+    status?: IntFilter<"User"> | number
     userType?: IntFilter<"User"> | number
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
@@ -3418,6 +3437,7 @@ export namespace Prisma {
     cpf?: SortOrder
     age?: SortOrder
     yearOfBirth?: SortOrder
+    status?: SortOrder
     userType?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -3433,6 +3453,7 @@ export namespace Prisma {
     name?: StringFilter<"User"> | string
     age?: IntFilter<"User"> | number
     yearOfBirth?: IntFilter<"User"> | number
+    status?: IntFilter<"User"> | number
     userType?: IntFilter<"User"> | number
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
@@ -3445,6 +3466,7 @@ export namespace Prisma {
     cpf?: SortOrder
     age?: SortOrder
     yearOfBirth?: SortOrder
+    status?: SortOrder
     userType?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -3464,6 +3486,7 @@ export namespace Prisma {
     cpf?: StringWithAggregatesFilter<"User"> | string
     age?: IntWithAggregatesFilter<"User"> | number
     yearOfBirth?: IntWithAggregatesFilter<"User"> | number
+    status?: IntWithAggregatesFilter<"User"> | number
     userType?: IntWithAggregatesFilter<"User"> | number
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -3528,6 +3551,7 @@ export namespace Prisma {
     cpf: string
     age: number
     yearOfBirth: number
+    status?: number
     userType?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -3540,6 +3564,7 @@ export namespace Prisma {
     cpf: string
     age: number
     yearOfBirth: number
+    status?: number
     userType?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -3552,6 +3577,7 @@ export namespace Prisma {
     cpf?: StringFieldUpdateOperationsInput | string
     age?: IntFieldUpdateOperationsInput | number
     yearOfBirth?: IntFieldUpdateOperationsInput | number
+    status?: IntFieldUpdateOperationsInput | number
     userType?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3564,6 +3590,7 @@ export namespace Prisma {
     cpf?: StringFieldUpdateOperationsInput | string
     age?: IntFieldUpdateOperationsInput | number
     yearOfBirth?: IntFieldUpdateOperationsInput | number
+    status?: IntFieldUpdateOperationsInput | number
     userType?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3576,6 +3603,7 @@ export namespace Prisma {
     cpf: string
     age: number
     yearOfBirth: number
+    status?: number
     userType?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -3587,6 +3615,7 @@ export namespace Prisma {
     cpf?: StringFieldUpdateOperationsInput | string
     age?: IntFieldUpdateOperationsInput | number
     yearOfBirth?: IntFieldUpdateOperationsInput | number
+    status?: IntFieldUpdateOperationsInput | number
     userType?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3598,6 +3627,7 @@ export namespace Prisma {
     cpf?: StringFieldUpdateOperationsInput | string
     age?: IntFieldUpdateOperationsInput | number
     yearOfBirth?: IntFieldUpdateOperationsInput | number
+    status?: IntFieldUpdateOperationsInput | number
     userType?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3719,6 +3749,7 @@ export namespace Prisma {
     cpf?: SortOrder
     age?: SortOrder
     yearOfBirth?: SortOrder
+    status?: SortOrder
     userType?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -3727,6 +3758,7 @@ export namespace Prisma {
   export type UserAvgOrderByAggregateInput = {
     age?: SortOrder
     yearOfBirth?: SortOrder
+    status?: SortOrder
     userType?: SortOrder
   }
 
@@ -3736,6 +3768,7 @@ export namespace Prisma {
     cpf?: SortOrder
     age?: SortOrder
     yearOfBirth?: SortOrder
+    status?: SortOrder
     userType?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -3747,6 +3780,7 @@ export namespace Prisma {
     cpf?: SortOrder
     age?: SortOrder
     yearOfBirth?: SortOrder
+    status?: SortOrder
     userType?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -3755,6 +3789,7 @@ export namespace Prisma {
   export type UserSumOrderByAggregateInput = {
     age?: SortOrder
     yearOfBirth?: SortOrder
+    status?: SortOrder
     userType?: SortOrder
   }
 
@@ -3966,6 +4001,7 @@ export namespace Prisma {
     cpf: string
     age: number
     yearOfBirth: number
+    status?: number
     userType?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -3977,6 +4013,7 @@ export namespace Prisma {
     cpf: string
     age: number
     yearOfBirth: number
+    status?: number
     userType?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -4012,6 +4049,7 @@ export namespace Prisma {
     cpf?: StringFilter<"User"> | string
     age?: IntFilter<"User"> | number
     yearOfBirth?: IntFilter<"User"> | number
+    status?: IntFilter<"User"> | number
     userType?: IntFilter<"User"> | number
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
@@ -4068,6 +4106,7 @@ export namespace Prisma {
     cpf?: StringFieldUpdateOperationsInput | string
     age?: IntFieldUpdateOperationsInput | number
     yearOfBirth?: IntFieldUpdateOperationsInput | number
+    status?: IntFieldUpdateOperationsInput | number
     userType?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4079,6 +4118,7 @@ export namespace Prisma {
     cpf?: StringFieldUpdateOperationsInput | string
     age?: IntFieldUpdateOperationsInput | number
     yearOfBirth?: IntFieldUpdateOperationsInput | number
+    status?: IntFieldUpdateOperationsInput | number
     userType?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4090,6 +4130,7 @@ export namespace Prisma {
     cpf?: StringFieldUpdateOperationsInput | string
     age?: IntFieldUpdateOperationsInput | number
     yearOfBirth?: IntFieldUpdateOperationsInput | number
+    status?: IntFieldUpdateOperationsInput | number
     userType?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

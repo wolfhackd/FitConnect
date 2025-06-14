@@ -5,6 +5,7 @@ import "./index.css";
 import PrivateRoute from "./middleware/PrivateRouter";
 import Dashboard from "./pages/admin/Dashboard";
 import Unauthorized from "./pages/Unauthorized";
+import StudentManager from "./pages/admin/StudentManager";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/unauthorized" element={<Unauthorized />} />
         <Route element={<PrivateRoute allowedTypes={[1]} />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/alunos" element={<StudentManager />} />
         </Route>
         <Route element={<PrivateRoute allowedTypes={[0]} />}>
           <Route path="/he" element={<Home />} />

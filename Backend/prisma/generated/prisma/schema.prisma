@@ -28,6 +28,7 @@ model User {
   cpf         String    @unique
   age         Int
   yearOfBirth Int
+  status      Int       @default(1)
   userType    Int       @default(0)
   academies   Academy[] @relation("AcademyUsers")
   createdAt   DateTime  @default(now())

@@ -30,15 +30,36 @@ router.post("/create", authMiddleware, typeOfUser(1), async (req, res) => {
 
 router.post("/listusers", authMiddleware, typeOfUser(1), async (req, res) => {
   try {
-    const users = await prisma.academy.findUnique({
-      where: {
-        id: req.body.id,
-      },
-      include: {
-        users: true,
-      },
-    });
-    res.status(200).json(users);
+    // console.log(req.body);
+    if (
+      req.body.status !== null &&
+      req.body.status !== undefined &&
+      req.body.status !== ""
+    ) {
+      const users = await prisma.academy.findUnique({
+        where: {
+          id: req.body.id,
+        },
+        include: {
+          users: {
+            where: {
+              status: req.body.status,
+            },
+          },
+        },
+      });
+      res.status(200).json(users);
+    } else {
+      const users = await prisma.academy.findUnique({
+        where: {
+          id: req.body.id,
+        },
+        include: {
+          users: true,
+        },
+      });
+      res.status(200).json(users);
+    }
   } catch (err) {
     res
       .status(500)

@@ -4,9 +4,10 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@radix-ui/react-tooltip";
-import { Dumbbell, ChartArea } from "lucide-react";
+import { Dumbbell, ChartArea, User } from "lucide-react";
 import React from "react";
 import { Button } from "./ui/button";
+import { useNavigate } from "react-router-dom";
 
 const AcademyIcon = () => {
   return (
@@ -20,11 +21,16 @@ const AcademyIcon = () => {
 
 const Sidebar = () => {
   const pathname = window.location.pathname;
+  const navigate = useNavigate();
 
   const icons = [
-    { Icon: ChartArea, label: "Imagens", href: "/dashboard" },
-    { Icon: ChartArea, label: "Imagens", href: "/#" },
+    { Icon: ChartArea, label: "Dashboard", href: "/dashboard" },
+    { Icon: User, label: "Alunos", href: "/alunos" },
   ];
+
+  const handleClick = () => {
+    navigate("/alunos");
+  };
 
   return (
     <TooltipProvider>
@@ -38,6 +44,7 @@ const Sidebar = () => {
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button
+                      onClick={handleClick}
                       variant="ghost"
                       className={`hover:bg-gray-100 size-12 hover:text-[#EF4444] cursor-pointer ${
                         isActive ? "text-[#EF4444]" : "text-black"

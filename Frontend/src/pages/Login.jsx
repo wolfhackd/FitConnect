@@ -86,8 +86,10 @@ const Login = () => {
           toast.error(response.data.message);
         }
         if (response.data.userType === 0) {
-          navigate("/he");
+          localStorage.setItem("academyId", payload.academyId);
+          navigate("/student/dashboard");
         } else if (response.data.userType === 1) {
+          localStorage.setItem("academyId", payload.academyId);
           navigate("/dashboard");
         }
       })
