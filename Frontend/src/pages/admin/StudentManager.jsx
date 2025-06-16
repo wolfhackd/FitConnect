@@ -14,20 +14,33 @@ import axios from "axios";
 
 const StudentManager = () => {
   const [status, setStatus] = React.useState("");
+  const [statusInput, setStatusInput] = React.useState("");
+  const [inputValue, setInputValue] = React.useState("");
+
+  React.useEffect(() => {
+    if (statusInput === "all") {
+      setStatus(null);
+    } else if (statusInput === "active") {
+      setStatus(1);
+    } else if (statusInput === "inactive") {
+      setStatus(0);
+    }
+  }, [statusInput]);
+
+  function handleInput(e) {
+    setInputValue(e.target.value);
+  }
 
   function handleClick() {
-    let payload = {};
-    if (status === "all") {
-      payload = {
-        id: localStorage.getItem("academyId"),
-        status: null,
-      };
-    } else {
-      payload = {
-        id: localStorage.getItem("academyId"),
-        status: status,
-      };
-    }
+    const academyId = localStorage.getItem("academyId");
+    const studentId = inputValue;
+
+    const payload = {
+      academyId,
+      studentId,
+      status,
+    };
+
     axios
       .post("http://localhost:3000/academy/listusers", payload, {
         withCredentials: true,
@@ -49,9 +62,16 @@ const StudentManager = () => {
         <div className="bg-white mt-4 rounded-md p-4">
           <div className="flex justify-between items-center w-full">
             <div className="flex w-full max-w-md items-center gap-2">
-              <Input placeholder="Digite o nome ou o cpf do aluno" />
+              <Input
+                name="search"
+                placeholder="Digite o nome ou o cpf do aluno"
+                onChange={handleInput}
+              />
               {/* não estou capturando o valor */}
-              <Select defaultValue="all" onValueChange={(e) => setStatus(e)}>
+              <Select
+                defaultValue="all"
+                onValueChange={(e) => setStatusInput(e)}
+              >
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="Estado" />
                 </SelectTrigger>
@@ -70,7 +90,6 @@ const StudentManager = () => {
                 Procurar
               </Button>
             </div>
-            {/* Filtros */}
             <Button
               type="submit"
               variant="outline"
