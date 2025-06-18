@@ -38,10 +38,15 @@ router.post("/listusers", authMiddleware, typeOfUser(1), async (req, res) => {
     }
 
     if (studentId !== null && studentId !== undefined && studentId !== "") {
-      filterConditions.name = {
-        contains: studentId,
-        mode: "insensitive",
-      };
+      const cpfRegex = /^\d{11}$/;
+      if (cpfRegex.test(studentId)) {
+        filterConditions.cpf = studentId;
+      } else {
+        filterConditions.name = {
+          contains: studentId,
+          mode: "insensitive",
+        };
+      }
     }
 
     const userFilter = {
@@ -74,6 +79,7 @@ router.post("/createuser", authMiddleware, typeOfUser(1), async (req, res) => {
         age: req.body.age, //numero inteiro
         yearOfBirth: req.body.yearOfBirth, //numero inteiro
         userType: req.body.userType ?? 0,
+        status: 1,
         academies: {
           connect: {
             id: req.body.id, // ID da academia que você deseja associar

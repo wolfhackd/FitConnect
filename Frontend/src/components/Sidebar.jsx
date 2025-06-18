@@ -28,8 +28,8 @@ const Sidebar = () => {
     { Icon: User, label: "Alunos", href: "/alunos" },
   ];
 
-  const handleClick = () => {
-    navigate("/alunos");
+  const handleClick = (href) => {
+    navigate(href);
   };
 
   return (
@@ -44,7 +44,7 @@ const Sidebar = () => {
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button
-                      onClick={handleClick}
+                      onClick={() => handleClick(icon.href)}
                       variant="ghost"
                       className={`hover:bg-gray-100 size-12 hover:text-[#EF4444] cursor-pointer ${
                         isActive ? "text-[#EF4444]" : "text-black"

@@ -11,11 +11,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import axios from "axios";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Avatar } from "@radix-ui/react-avatar";
+import { AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { User } from "lucide-react";
 
 const StudentManager = () => {
   const [status, setStatus] = React.useState("");
   const [statusInput, setStatusInput] = React.useState("");
   const [inputValue, setInputValue] = React.useState("");
+  const [users, setUsers] = React.useState([]); //Vou colocar a resposta da api aqui
 
   React.useEffect(() => {
     if (statusInput === "all") {
@@ -46,7 +51,7 @@ const StudentManager = () => {
         withCredentials: true,
       })
       .then((response) => {
-        console.log(response.data);
+        setUsers(response.data.users);
       })
       .catch((err) => {
         console.log(err.response.data.message);
@@ -67,7 +72,6 @@ const StudentManager = () => {
                 placeholder="Digite o nome ou o cpf do aluno"
                 onChange={handleInput}
               />
-              {/* não estou capturando o valor */}
               <Select
                 defaultValue="all"
                 onValueChange={(e) => setStatusInput(e)}
@@ -99,6 +103,42 @@ const StudentManager = () => {
             </Button>
           </div>
         </div>
+        {/* Aqui vai a tabela de alunos */}
+        <div className="bg-white mt-4 rounded-md p-4 flex items-center justify-center">
+          {users.length === 0 && (
+            <span>Nenhum aluno encontrado ou pesquisa inválida</span>
+          )}
+          <div className="gap-4 grid grid-cols-5">
+            {users.map((user) => {
+              return (
+                <Card className={"w-80"}>
+                  <CardHeader className={"justify-center"}>
+                    <CardTitle>
+                      <Avatar>
+                        <AvatarImage
+                          src="https://github.com/shadcn.png"
+                          alt="Avatar img"
+                          className="rounded-full w-24 h-24"
+                        />
+                        <AvatarFallback>
+                          <User className="rounded-full size-10 bg-gray-200 text-gray-600" />
+                        </AvatarFallback>
+                      </Avatar>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="font-bold">{user.name}</p>
+
+                    <p>
+                      <span className="font-bold">CPF:</span>
+                      {user.cpf}
+                    </p>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </div>
       </section>
     </div>
   );
@@ -110,4 +150,3 @@ export default StudentManager;
 //Se tiver aluno, mostrar o aluno
 //Se não tiver aluno, mostrar mensagem
 //Tenho que colocar opções de criar alunos e editar alunos
-//O id da academia ta no localstorage ------------------------

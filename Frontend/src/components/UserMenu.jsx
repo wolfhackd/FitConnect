@@ -5,10 +5,21 @@ import React, { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { useNavigate } from "react-router-dom";
 import ButtonFunctions from "./ButtonFunctions";
+import axios from "axios";
 
 const UserMenu = () => {
   const [currentDate, setCurrentDate] = useState("");
+  const [name, setName] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/auth/check", { withCredentials: true })
+      .then((res) => {
+        setName(res.data.user.name.split(" ")[0]);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   useEffect(() => {
     const updateTime = () => {
@@ -78,7 +89,7 @@ const UserMenu = () => {
       {/* Avatar + Logout */}
       <div className="flex items-center gap-4">
         <div className="flex items-center gap-2">
-          <p className="text-gray-800 font-medium">Bem-vinda, Professor</p>
+          <p className="text-gray-800 font-medium">Bem-vindo, {name}</p>
           <Avatar>
             <AvatarImage
               src="https://github.com/shadcn.png"
