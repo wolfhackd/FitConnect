@@ -29,7 +29,7 @@ router.post("/create", authMiddleware, typeOfUser(1), async (req, res) => {
 });
 
 router.post("/listusers", authMiddleware, typeOfUser(1), async (req, res) => {
-  const { academyId, status, studentId } = req.body; //falta tratar se for cpf
+  const { academyId, status, studentId } = req.body;
   try {
     const filterConditions = {};
 

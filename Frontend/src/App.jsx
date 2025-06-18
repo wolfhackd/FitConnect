@@ -6,6 +6,7 @@ import PrivateRoute from "./middleware/PrivateRouter";
 import Dashboard from "./pages/admin/Dashboard";
 import Unauthorized from "./pages/Unauthorized";
 import StudentManager from "./pages/admin/StudentManager";
+import CreateStudent from "./pages/admin/CreateStudent";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route element={<PrivateRoute allowedTypes={[1]} />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/alunos" element={<StudentManager />} />
+          <Route path="/alunos/criar" element={<CreateStudent />} />
         </Route>
         <Route element={<PrivateRoute allowedTypes={[0]} />}>
           <Route path="/he" element={<Home />} />

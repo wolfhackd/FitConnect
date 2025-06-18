@@ -15,12 +15,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar } from "@radix-ui/react-avatar";
 import { AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { User } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const StudentManager = () => {
   const [status, setStatus] = React.useState("");
   const [statusInput, setStatusInput] = React.useState("");
   const [inputValue, setInputValue] = React.useState("");
-  const [users, setUsers] = React.useState([]); //Vou colocar a resposta da api aqui
+  const [users, setUsers] = React.useState([]);
+
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     if (statusInput === "all") {
@@ -98,6 +101,7 @@ const StudentManager = () => {
               type="submit"
               variant="outline"
               className={"cursor-pointer bg-[#1F2937] text-white"}
+              onClick={() => navigate("/alunos/criar")}
             >
               Criar Aluno
             </Button>

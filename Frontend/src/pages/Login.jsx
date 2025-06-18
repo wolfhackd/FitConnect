@@ -87,7 +87,6 @@ const Login = () => {
         }
         if (response.data.userType === 0) {
           localStorage.setItem("academyId", payload.academyId);
-          // localStorage.setItem("name", response.data.name);
           navigate("/student/dashboard");
         } else if (response.data.userType === 1) {
           localStorage.setItem("academyId", payload.academyId);
