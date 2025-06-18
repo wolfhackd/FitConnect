@@ -7,7 +7,7 @@ import {
 import { Dumbbell, ChartArea, User } from "lucide-react";
 import React from "react";
 import { Button } from "./ui/button";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const AcademyIcon = () => {
   return (
@@ -17,11 +17,10 @@ const AcademyIcon = () => {
   );
 };
 
-//Fazer uma função para quando clicar no item ele fica vermelho e na sua pagina
-
 const Sidebar = () => {
-  const pathname = window.location.pathname;
+  const location = useLocation();
   const navigate = useNavigate();
+  const pathname = location.pathname;
 
   const icons = [
     { Icon: ChartArea, label: "Dashboard", href: "/dashboard" },
@@ -38,7 +37,7 @@ const Sidebar = () => {
         <AcademyIcon />
         <nav className="flex flex-col gap-1">
           {icons.map((icon, index) => {
-            const isActive = pathname === icon.href;
+            const isActive = pathname.startsWith(icon.href);
             return (
               <nav key={index}>
                 <Tooltip>

@@ -1,6 +1,4 @@
 import React from "react";
-import Sidebar from "../../components/Sidebar";
-import UserMenu from "@/components/UserMenu";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,6 +14,7 @@ import { Avatar } from "@radix-ui/react-avatar";
 import { AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import LayoutAdmin from "@/components/LayoutAdmin";
 
 const StudentManager = () => {
   const [status, setStatus] = React.useState("");
@@ -62,95 +61,85 @@ const StudentManager = () => {
   }
 
   return (
-    <div className="w-screen flex">
-      <Sidebar />
-      <section className="flex-1 bg-[#E5E7EB] p-8">
-        <UserMenu />
-        {/* Aqui vai a barra de pesquisa e o botão de criar aluno */}
-        <div className="bg-white mt-4 rounded-md p-4">
-          <div className="flex justify-between items-center w-full">
-            <div className="flex w-full max-w-md items-center gap-2">
-              <Input
-                name="search"
-                placeholder="Digite o nome ou o cpf do aluno"
-                onChange={handleInput}
-              />
-              <Select
-                defaultValue="all"
-                onValueChange={(e) => setStatusInput(e)}
-              >
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Estado" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Todos</SelectItem>
-                  <SelectItem value="active">Ativo</SelectItem>
-                  <SelectItem value="inactive">Inativo</SelectItem>
-                </SelectContent>
-              </Select>
-              <Button
-                type="submit"
-                variant="outline"
-                className={"cursor-pointer bg-[#1F2937] text-white"}
-                onClick={handleClick}
-              >
-                Procurar
-              </Button>
-            </div>
+    <LayoutAdmin className="flex-1 bg-[#E5E7EB] p-8">
+      {/* Aqui vai a barra de pesquisa e o botão de criar aluno */}
+      <div className="bg-white mt-4 rounded-md p-4">
+        <div className="flex justify-between items-center w-full">
+          <div className="flex w-full max-w-md items-center gap-2">
+            <Input
+              name="search"
+              placeholder="Digite o nome ou o cpf do aluno"
+              onChange={handleInput}
+            />
+            <Select defaultValue="all" onValueChange={(e) => setStatusInput(e)}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Estado" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Todos</SelectItem>
+                <SelectItem value="active">Ativo</SelectItem>
+                <SelectItem value="inactive">Inativo</SelectItem>
+              </SelectContent>
+            </Select>
             <Button
               type="submit"
               variant="outline"
               className={"cursor-pointer bg-[#1F2937] text-white"}
-              onClick={() => navigate("/alunos/criar")}
+              onClick={handleClick}
             >
-              Criar Aluno
+              Procurar
             </Button>
           </div>
+          <Button
+            type="submit"
+            variant="outline"
+            className={"cursor-pointer bg-[#1F2937] text-white"}
+            onClick={() => navigate("/alunos/criar")}
+          >
+            Criar Aluno
+          </Button>
         </div>
-        {/* Aqui vai a tabela de alunos */}
-        <div className="bg-white mt-4 rounded-md p-4 flex items-center justify-center">
-          {users.length === 0 && (
-            <span>Nenhum aluno encontrado ou pesquisa inválida</span>
-          )}
-          <div className="gap-4 grid grid-cols-5">
-            {users.map((user) => {
-              return (
-                <Card className={"w-80"}>
-                  <CardHeader className={"justify-center"}>
-                    <CardTitle>
-                      <Avatar>
-                        <AvatarImage
-                          src="https://github.com/shadcn.png"
-                          alt="Avatar img"
-                          className="rounded-full w-24 h-24"
-                        />
-                        <AvatarFallback>
-                          <User className="rounded-full size-10 bg-gray-200 text-gray-600" />
-                        </AvatarFallback>
-                      </Avatar>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="font-bold">{user.name}</p>
+      </div>
+      {/* Aqui vai a tabela de alunos */}
+      <div className="bg-white mt-4 rounded-md p-4 flex items-center justify-center">
+        {users.length === 0 && (
+          <span>Nenhum aluno encontrado ou pesquisa inválida</span>
+        )}
+        <div className="gap-4 grid grid-cols-5">
+          {users.map((user) => {
+            return (
+              <Card className={"w-80"}>
+                <CardHeader className={"justify-center"}>
+                  <CardTitle>
+                    <Avatar>
+                      <AvatarImage
+                        src="https://github.com/shadcn.png"
+                        alt="Avatar img"
+                        className="rounded-full w-24 h-24"
+                      />
+                      <AvatarFallback>
+                        <User className="rounded-full size-10 bg-gray-200 text-gray-600" />
+                      </AvatarFallback>
+                    </Avatar>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="font-bold">{user.name}</p>
 
-                    <p>
-                      <span className="font-bold">CPF:</span>
-                      {user.cpf}
-                    </p>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
+                  <p>
+                    <span className="font-bold">CPF:</span>
+                    {user.cpf}
+                  </p>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
-      </section>
-    </div>
+      </div>
+    </LayoutAdmin>
   );
 };
 
 export default StudentManager;
 
-//Tenho que verificar se tem aluno
-//Se tiver aluno, mostrar o aluno
-//Se não tiver aluno, mostrar mensagem
 //Tenho que colocar opções de criar alunos e editar alunos

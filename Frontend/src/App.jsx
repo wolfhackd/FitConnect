@@ -15,11 +15,13 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
+        {/* ---------------------------------------------------------------- */}
         <Route element={<PrivateRoute allowedTypes={[1]} />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/alunos" element={<StudentManager />} />
           <Route path="/alunos/criar" element={<CreateStudent />} />
         </Route>
+        {/* ---------------------------------------------------------------- */}
         <Route element={<PrivateRoute allowedTypes={[0]} />}>
           <Route path="/he" element={<Home />} />
         </Route>
