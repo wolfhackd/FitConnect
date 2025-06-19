@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
-
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
@@ -10,9 +8,7 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 
-export function DatePicker() {
-  const [date, setDate] = useState(null);
-
+export function DatePicker({ selectedDate, onChange }) {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -21,14 +17,16 @@ export function DatePicker() {
           className="w-full justify-start text-left font-normal"
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
-          {date ? format(date, "dd/MM/yyyy") : "Selecionar data"}
+          {selectedDate
+            ? format(selectedDate, "dd/MM/yyyy")
+            : "Selecionar data"}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
         <Calendar
           mode="single"
-          selected={date}
-          onSelect={setDate}
+          selected={selectedDate}
+          onSelect={onChange}
           initialFocus
           captionLayout="dropdown"
           fromDate={new Date(1900, 0, 1)}
