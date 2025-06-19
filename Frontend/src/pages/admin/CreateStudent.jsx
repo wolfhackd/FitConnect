@@ -27,7 +27,22 @@ const CreateStudent = () => {
       return;
     }
 
+    if (!/^\d+$/.test(cpf)) {
+      toast.error("Digite apenas números no campo de CPF.");
+      return;
+    }
+
+    const data = new Date(birth).toISOString();
+
     toast.success(`Aluno cadastrado com sucesso! 🎉`);
+
+    console.log({
+      name,
+      cpf,
+      plano,
+      data,
+      phone,
+    });
 
     // aqui você pode enviar para sua API, se quiser
   };

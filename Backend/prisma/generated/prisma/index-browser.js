@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.9.0
- * Query Engine version: 81e4af48011447c3cc503a190e86995b66d2a28e
+ * Prisma Client JS version: 6.10.1
+ * Query Engine version: 9b628578b3b7cae625e8c927178f15a170e74a9c
  */
 Prisma.prismaVersion = {
-  client: "6.9.0",
-  engine: "81e4af48011447c3cc503a190e86995b66d2a28e"
+  client: "6.10.1",
+  engine: "9b628578b3b7cae625e8c927178f15a170e74a9c"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -131,12 +131,28 @@ exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
   cpf: 'cpf',
-  age: 'age',
-  yearOfBirth: 'yearOfBirth',
-  status: 'status',
+  birth: 'birth',
+  phone: 'phone',
   userType: 'userType',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PlanScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  price: 'price',
+  duration: 'duration'
+};
+
+exports.Prisma.SubscriptionScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  planId: 'planId',
+  academyId: 'academyId',
+  start: 'start',
+  end: 'end',
+  active: 'active'
 };
 
 exports.Prisma.SortOrder = {
@@ -152,7 +168,9 @@ exports.Prisma.QueryMode = {
 
 exports.Prisma.ModelName = {
   Academy: 'Academy',
-  User: 'User'
+  User: 'User',
+  Plan: 'Plan',
+  Subscription: 'Subscription'
 };
 
 /**

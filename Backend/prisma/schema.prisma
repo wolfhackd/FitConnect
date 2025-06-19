@@ -27,11 +27,32 @@ model User {
   id          String     @id @default(cuid())
   name        String
   cpf         String        @unique
-  age         Int        
-  yearOfBirth Int        
-  status      Int        @default(1) 
+  birth       DateTime
+  phone       String
   userType    Int        @default(0)
   academies   Academy[]  @relation("AcademyUsers")
+  subscription Subscription[]
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
+}
+
+model Plan {
+  id          String   @id @default(cuid())
+  name        String
+  price       Decimal
+  duration    Int       
+  students    Subscription[]
+}
+
+model Subscription {
+  id        String   @id @default(cuid())
+  studentId String
+  planId    String
+  academyId String
+  start     DateTime
+  end       DateTime
+  active    Boolean  @default(true)
+
+  user      User     @relation(fields: [studentId], references: [id])
+  plan      Plan     @relation(fields: [planId], references: [id])
 }

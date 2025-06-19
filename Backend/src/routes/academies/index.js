@@ -12,8 +12,9 @@ router.get("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-router.post("/create", authMiddleware, typeOfUser(1), async (req, res) => {
+//admin
+// router.post("/create", authMiddleware, typeOfUser(1), async (req, res) => {
+router.post("/create", async (req, res) => {
   try {
     const newAcademy = await prisma.academy.create({
       data: {
@@ -69,17 +70,17 @@ router.post("/listusers", authMiddleware, typeOfUser(1), async (req, res) => {
       .json({ error: "Erro ao buscar usuarios", details: err.message });
   }
 });
-
-router.post("/createuser", authMiddleware, typeOfUser(1), async (req, res) => {
+//tenho que fazer um admin tbm
+// router.post("/createuser", authMiddleware, typeOfUser(1), async (req, res) => {
+router.post("/createuser", async (req, res) => {
   try {
     const newUser = await prisma.user.create({
       data: {
         name: req.body.name,
         cpf: req.body.cpf,
-        age: req.body.age, //numero inteiro
-        yearOfBirth: req.body.yearOfBirth, //numero inteiro
+        birth: new Date(req.body.birth),
         userType: req.body.userType ?? 0,
-        status: 1,
+        phone: req.body.phone,
         academies: {
           connect: {
             id: req.body.id, // ID da academia que você deseja associar
