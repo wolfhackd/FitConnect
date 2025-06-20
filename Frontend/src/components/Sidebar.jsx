@@ -4,7 +4,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@radix-ui/react-tooltip";
-import { Dumbbell, ChartArea, User } from "lucide-react";
+import { Dumbbell, ChartArea, User, CreditCard } from "lucide-react";
 import React from "react";
 import { Button } from "./ui/button";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -25,6 +25,7 @@ const Sidebar = () => {
   const icons = [
     { Icon: ChartArea, label: "Dashboard", href: "/dashboard" },
     { Icon: User, label: "Alunos", href: "/alunos" },
+    { Icon: CreditCard, label: "Planos", href: "/planos" },
   ];
 
   const handleClick = (href) => {

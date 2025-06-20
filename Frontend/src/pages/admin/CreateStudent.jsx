@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/select";
 import { Toaster, toast } from "sonner";
 import { DatePicker } from "@/components/DatePicker";
+import { ChevronLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const CreateStudent = () => {
   const [name, setName] = useState("");
@@ -19,6 +21,9 @@ const CreateStudent = () => {
   const [plano, setPlano] = useState("");
   const [birth, setBirth] = useState(null);
   const [phone, setPhone] = useState("");
+
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -44,48 +49,63 @@ const CreateStudent = () => {
       phone,
     });
 
-    // aqui você pode enviar para sua API, se quiser
+    // Envio para API viria aqui
   };
 
   return (
     <LayoutAdmin>
       <Toaster position="top-center" />
-      <div className="bg-white rounded-md my-4">
-        <form
-          className="space-y-4 max-w-md mx-auto p-6"
-          onSubmit={handleSubmit}
+      <div className="bg-white mt-4 p-6 rounded-md shadow-md max-w-xl mx-auto">
+        {/* Botão de voltar */}
+        <Button
+          variant="outline"
+          onClick={() => navigate(-1)}
+          className="mb-6 flex items-center gap-2 cursor-pointer"
         >
-          <div className="space-y-2">
+          <ChevronLeft className="w-4 h-4" />
+          Voltar
+        </Button>
+
+        <h1 className="text-2xl font-bold mb-6">Cadastro de Aluno</h1>
+
+        <form onSubmit={(e) => handleSubmit(e)} className="space-y-4">
+          <div>
             <Label htmlFor="name">Nome completo</Label>
             <Input
-              name="name"
-              placeholder="Digite seu nome"
+              id="name"
+              placeholder="Digite o nome do aluno"
+              value={name}
               onChange={(e) => setName(e.target.value)}
+              required
             />
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="phone">Número de telefone</Label>
+          <div>
+            <Label htmlFor="phone">Telefone</Label>
             <Input
-              name="phone"
-              placeholder="Digite seu telefone"
+              id="phone"
+              placeholder="Digite o telefone"
+              value={phone}
               onChange={(e) => setPhone(e.target.value)}
+              required
             />
           </div>
 
-          <div className="space-y-2">
+          <div>
             <Label htmlFor="cpf">CPF</Label>
             <Input
-              name="cpf"
+              id="cpf"
               type="number"
-              placeholder="12345678910"
+              placeholder="Digite apenas números"
+              value={cpf}
               onChange={(e) => setCpf(e.target.value)}
+              required
             />
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="plano">Plano</Label>
-            <Select onValueChange={(value) => setPlano(value)}>
+          <div>
+            <Label htmlFor="plan">Plano</Label>
+            <Select onValueChange={setPlano}>
               <SelectTrigger>
                 <SelectValue placeholder="Escolha um plano" />
               </SelectTrigger>
@@ -98,13 +118,13 @@ const CreateStudent = () => {
             </Select>
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="email">Data de Nascimento</Label>
+          <div>
+            <Label htmlFor="birth">Data de Nascimento</Label>
             <DatePicker selectedDate={birth} onChange={setBirth} />
           </div>
 
-          <Button type="submit" className="w-full">
-            Inscrever-se
+          <Button type="submit" className="w-full mt-4 cursor-pointer">
+            Cadastrar
           </Button>
         </form>
       </div>

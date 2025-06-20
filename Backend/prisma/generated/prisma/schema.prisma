@@ -15,11 +15,12 @@ datasource db {
 }
 
 model Academy {
-  id        String   @id @default(cuid())
-  name      String
-  users     User[]   @relation("AcademyUsers")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            String         @id @default(cuid())
+  name          String
+  users         User[]         @relation("AcademyUsers")
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  subscriptions Subscription[]
 }
 
 model User {
@@ -28,7 +29,6 @@ model User {
   cpf          String         @unique
   birth        DateTime
   phone        String
-  // status      Int        @default(1) 
   userType     Int            @default(0)
   academies    Academy[]      @relation("AcademyUsers")
   subscription Subscription[]
@@ -52,7 +52,7 @@ model Subscription {
   start     DateTime
   end       DateTime
   active    Boolean  @default(true)
-
-  user User @relation(fields: [studentId], references: [id])
-  plan Plan @relation(fields: [planId], references: [id])
+  user      User     @relation(fields: [studentId], references: [id])
+  plan      Plan     @relation(fields: [planId], references: [id])
+  academy   Academy  @relation(fields: [academyId], references: [id])
 }

@@ -7,6 +7,8 @@ import Dashboard from "./pages/admin/Dashboard";
 import Unauthorized from "./pages/Unauthorized";
 import StudentManager from "./pages/admin/StudentManager";
 import CreateStudent from "./pages/admin/CreateStudent";
+import PlanManager from "./pages/admin/PlanManager";
+import CreatePlan from "./pages/admin/CreatePlan";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/alunos" element={<StudentManager />} />
           <Route path="/alunos/criar" element={<CreateStudent />} />
+          <Route path="/planos" element={<PlanManager />} />
+          <Route path="/planos/criar" element={<CreatePlan />} />
         </Route>
         {/* ---------------------------------------------------------------- */}
         <Route element={<PrivateRoute allowedTypes={[0]} />}>

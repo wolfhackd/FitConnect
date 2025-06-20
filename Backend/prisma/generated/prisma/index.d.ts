@@ -1143,10 +1143,12 @@ export namespace Prisma {
 
   export type AcademyCountOutputType = {
     users: number
+    subscriptions: number
   }
 
   export type AcademyCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | AcademyCountOutputTypeCountUsersArgs
+    subscriptions?: boolean | AcademyCountOutputTypeCountSubscriptionsArgs
   }
 
   // Custom InputTypes
@@ -1165,6 +1167,13 @@ export namespace Prisma {
    */
   export type AcademyCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserWhereInput
+  }
+
+  /**
+   * AcademyCountOutputType without action
+   */
+  export type AcademyCountOutputTypeCountSubscriptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SubscriptionWhereInput
   }
 
 
@@ -1400,6 +1409,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     users?: boolean | Academy$usersArgs<ExtArgs>
+    subscriptions?: boolean | Academy$subscriptionsArgs<ExtArgs>
     _count?: boolean | AcademyCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["academy"]>
 
@@ -1427,6 +1437,7 @@ export namespace Prisma {
   export type AcademyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["academy"]>
   export type AcademyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | Academy$usersArgs<ExtArgs>
+    subscriptions?: boolean | Academy$subscriptionsArgs<ExtArgs>
     _count?: boolean | AcademyCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AcademyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1436,6 +1447,7 @@ export namespace Prisma {
     name: "Academy"
     objects: {
       users: Prisma.$UserPayload<ExtArgs>[]
+      subscriptions: Prisma.$SubscriptionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1837,6 +1849,7 @@ export namespace Prisma {
   export interface Prisma__AcademyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     users<T extends Academy$usersArgs<ExtArgs> = {}>(args?: Subset<T, Academy$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    subscriptions<T extends Academy$subscriptionsArgs<ExtArgs> = {}>(args?: Subset<T, Academy$subscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2279,6 +2292,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * Academy.subscriptions
+   */
+  export type Academy$subscriptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    where?: SubscriptionWhereInput
+    orderBy?: SubscriptionOrderByWithRelationInput | SubscriptionOrderByWithRelationInput[]
+    cursor?: SubscriptionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SubscriptionScalarFieldEnum | SubscriptionScalarFieldEnum[]
   }
 
   /**
@@ -4748,6 +4785,7 @@ export namespace Prisma {
     active?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     plan?: boolean | PlanDefaultArgs<ExtArgs>
+    academy?: boolean | AcademyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["subscription"]>
 
   export type SubscriptionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4760,6 +4798,7 @@ export namespace Prisma {
     active?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     plan?: boolean | PlanDefaultArgs<ExtArgs>
+    academy?: boolean | AcademyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["subscription"]>
 
   export type SubscriptionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4772,6 +4811,7 @@ export namespace Prisma {
     active?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     plan?: boolean | PlanDefaultArgs<ExtArgs>
+    academy?: boolean | AcademyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["subscription"]>
 
   export type SubscriptionSelectScalar = {
@@ -4788,14 +4828,17 @@ export namespace Prisma {
   export type SubscriptionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     plan?: boolean | PlanDefaultArgs<ExtArgs>
+    academy?: boolean | AcademyDefaultArgs<ExtArgs>
   }
   export type SubscriptionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     plan?: boolean | PlanDefaultArgs<ExtArgs>
+    academy?: boolean | AcademyDefaultArgs<ExtArgs>
   }
   export type SubscriptionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     plan?: boolean | PlanDefaultArgs<ExtArgs>
+    academy?: boolean | AcademyDefaultArgs<ExtArgs>
   }
 
   export type $SubscriptionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4803,6 +4846,7 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
       plan: Prisma.$PlanPayload<ExtArgs>
+      academy: Prisma.$AcademyPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5208,6 +5252,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     plan<T extends PlanDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PlanDefaultArgs<ExtArgs>>): Prisma__PlanClient<$Result.GetResult<Prisma.$PlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    academy<T extends AcademyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AcademyDefaultArgs<ExtArgs>>): Prisma__AcademyClient<$Result.GetResult<Prisma.$AcademyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5829,6 +5874,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Academy"> | Date | string
     updatedAt?: DateTimeFilter<"Academy"> | Date | string
     users?: UserListRelationFilter
+    subscriptions?: SubscriptionListRelationFilter
   }
 
   export type AcademyOrderByWithRelationInput = {
@@ -5837,6 +5883,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     users?: UserOrderByRelationAggregateInput
+    subscriptions?: SubscriptionOrderByRelationAggregateInput
   }
 
   export type AcademyWhereUniqueInput = Prisma.AtLeast<{
@@ -5848,6 +5895,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Academy"> | Date | string
     updatedAt?: DateTimeFilter<"Academy"> | Date | string
     users?: UserListRelationFilter
+    subscriptions?: SubscriptionListRelationFilter
   }, "id">
 
   export type AcademyOrderByWithAggregationInput = {
@@ -6010,6 +6058,7 @@ export namespace Prisma {
     active?: BoolFilter<"Subscription"> | boolean
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     plan?: XOR<PlanScalarRelationFilter, PlanWhereInput>
+    academy?: XOR<AcademyScalarRelationFilter, AcademyWhereInput>
   }
 
   export type SubscriptionOrderByWithRelationInput = {
@@ -6022,6 +6071,7 @@ export namespace Prisma {
     active?: SortOrder
     user?: UserOrderByWithRelationInput
     plan?: PlanOrderByWithRelationInput
+    academy?: AcademyOrderByWithRelationInput
   }
 
   export type SubscriptionWhereUniqueInput = Prisma.AtLeast<{
@@ -6037,6 +6087,7 @@ export namespace Prisma {
     active?: BoolFilter<"Subscription"> | boolean
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     plan?: XOR<PlanScalarRelationFilter, PlanWhereInput>
+    academy?: XOR<AcademyScalarRelationFilter, AcademyWhereInput>
   }, "id">
 
   export type SubscriptionOrderByWithAggregationInput = {
@@ -6071,6 +6122,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutAcademiesInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutAcademyInput
   }
 
   export type AcademyUncheckedCreateInput = {
@@ -6079,6 +6131,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutAcademiesInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutAcademyInput
   }
 
   export type AcademyUpdateInput = {
@@ -6087,6 +6140,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutAcademiesNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutAcademyNestedInput
   }
 
   export type AcademyUncheckedUpdateInput = {
@@ -6095,6 +6149,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutAcademiesNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutAcademyNestedInput
   }
 
   export type AcademyCreateManyInput = {
@@ -6258,12 +6313,12 @@ export namespace Prisma {
 
   export type SubscriptionCreateInput = {
     id?: string
-    academyId: string
     start: Date | string
     end: Date | string
     active?: boolean
     user: UserCreateNestedOneWithoutSubscriptionInput
     plan: PlanCreateNestedOneWithoutStudentsInput
+    academy: AcademyCreateNestedOneWithoutSubscriptionsInput
   }
 
   export type SubscriptionUncheckedCreateInput = {
@@ -6278,12 +6333,12 @@ export namespace Prisma {
 
   export type SubscriptionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    academyId?: StringFieldUpdateOperationsInput | string
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: DateTimeFieldUpdateOperationsInput | Date | string
     active?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutSubscriptionNestedInput
     plan?: PlanUpdateOneRequiredWithoutStudentsNestedInput
+    academy?: AcademyUpdateOneRequiredWithoutSubscriptionsNestedInput
   }
 
   export type SubscriptionUncheckedUpdateInput = {
@@ -6308,7 +6363,6 @@ export namespace Prisma {
 
   export type SubscriptionUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    academyId?: StringFieldUpdateOperationsInput | string
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: DateTimeFieldUpdateOperationsInput | Date | string
     active?: BoolFieldUpdateOperationsInput | boolean
@@ -6356,7 +6410,17 @@ export namespace Prisma {
     none?: UserWhereInput
   }
 
+  export type SubscriptionListRelationFilter = {
+    every?: SubscriptionWhereInput
+    some?: SubscriptionWhereInput
+    none?: SubscriptionWhereInput
+  }
+
   export type UserOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SubscriptionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -6430,17 +6494,7 @@ export namespace Prisma {
     none?: AcademyWhereInput
   }
 
-  export type SubscriptionListRelationFilter = {
-    every?: SubscriptionWhereInput
-    some?: SubscriptionWhereInput
-    none?: SubscriptionWhereInput
-  }
-
   export type AcademyOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type SubscriptionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -6574,6 +6628,11 @@ export namespace Prisma {
     isNot?: PlanWhereInput
   }
 
+  export type AcademyScalarRelationFilter = {
+    is?: AcademyWhereInput
+    isNot?: AcademyWhereInput
+  }
+
   export type SubscriptionCountOrderByAggregateInput = {
     id?: SortOrder
     studentId?: SortOrder
@@ -6618,10 +6677,24 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
+  export type SubscriptionCreateNestedManyWithoutAcademyInput = {
+    create?: XOR<SubscriptionCreateWithoutAcademyInput, SubscriptionUncheckedCreateWithoutAcademyInput> | SubscriptionCreateWithoutAcademyInput[] | SubscriptionUncheckedCreateWithoutAcademyInput[]
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutAcademyInput | SubscriptionCreateOrConnectWithoutAcademyInput[]
+    createMany?: SubscriptionCreateManyAcademyInputEnvelope
+    connect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+  }
+
   export type UserUncheckedCreateNestedManyWithoutAcademiesInput = {
     create?: XOR<UserCreateWithoutAcademiesInput, UserUncheckedCreateWithoutAcademiesInput> | UserCreateWithoutAcademiesInput[] | UserUncheckedCreateWithoutAcademiesInput[]
     connectOrCreate?: UserCreateOrConnectWithoutAcademiesInput | UserCreateOrConnectWithoutAcademiesInput[]
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type SubscriptionUncheckedCreateNestedManyWithoutAcademyInput = {
+    create?: XOR<SubscriptionCreateWithoutAcademyInput, SubscriptionUncheckedCreateWithoutAcademyInput> | SubscriptionCreateWithoutAcademyInput[] | SubscriptionUncheckedCreateWithoutAcademyInput[]
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutAcademyInput | SubscriptionCreateOrConnectWithoutAcademyInput[]
+    createMany?: SubscriptionCreateManyAcademyInputEnvelope
+    connect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -6645,6 +6718,20 @@ export namespace Prisma {
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
+  export type SubscriptionUpdateManyWithoutAcademyNestedInput = {
+    create?: XOR<SubscriptionCreateWithoutAcademyInput, SubscriptionUncheckedCreateWithoutAcademyInput> | SubscriptionCreateWithoutAcademyInput[] | SubscriptionUncheckedCreateWithoutAcademyInput[]
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutAcademyInput | SubscriptionCreateOrConnectWithoutAcademyInput[]
+    upsert?: SubscriptionUpsertWithWhereUniqueWithoutAcademyInput | SubscriptionUpsertWithWhereUniqueWithoutAcademyInput[]
+    createMany?: SubscriptionCreateManyAcademyInputEnvelope
+    set?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    disconnect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    delete?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    connect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    update?: SubscriptionUpdateWithWhereUniqueWithoutAcademyInput | SubscriptionUpdateWithWhereUniqueWithoutAcademyInput[]
+    updateMany?: SubscriptionUpdateManyWithWhereWithoutAcademyInput | SubscriptionUpdateManyWithWhereWithoutAcademyInput[]
+    deleteMany?: SubscriptionScalarWhereInput | SubscriptionScalarWhereInput[]
+  }
+
   export type UserUncheckedUpdateManyWithoutAcademiesNestedInput = {
     create?: XOR<UserCreateWithoutAcademiesInput, UserUncheckedCreateWithoutAcademiesInput> | UserCreateWithoutAcademiesInput[] | UserUncheckedCreateWithoutAcademiesInput[]
     connectOrCreate?: UserCreateOrConnectWithoutAcademiesInput | UserCreateOrConnectWithoutAcademiesInput[]
@@ -6656,6 +6743,20 @@ export namespace Prisma {
     update?: UserUpdateWithWhereUniqueWithoutAcademiesInput | UserUpdateWithWhereUniqueWithoutAcademiesInput[]
     updateMany?: UserUpdateManyWithWhereWithoutAcademiesInput | UserUpdateManyWithWhereWithoutAcademiesInput[]
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type SubscriptionUncheckedUpdateManyWithoutAcademyNestedInput = {
+    create?: XOR<SubscriptionCreateWithoutAcademyInput, SubscriptionUncheckedCreateWithoutAcademyInput> | SubscriptionCreateWithoutAcademyInput[] | SubscriptionUncheckedCreateWithoutAcademyInput[]
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutAcademyInput | SubscriptionCreateOrConnectWithoutAcademyInput[]
+    upsert?: SubscriptionUpsertWithWhereUniqueWithoutAcademyInput | SubscriptionUpsertWithWhereUniqueWithoutAcademyInput[]
+    createMany?: SubscriptionCreateManyAcademyInputEnvelope
+    set?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    disconnect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    delete?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    connect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    update?: SubscriptionUpdateWithWhereUniqueWithoutAcademyInput | SubscriptionUpdateWithWhereUniqueWithoutAcademyInput[]
+    updateMany?: SubscriptionUpdateManyWithWhereWithoutAcademyInput | SubscriptionUpdateManyWithWhereWithoutAcademyInput[]
+    deleteMany?: SubscriptionScalarWhereInput | SubscriptionScalarWhereInput[]
   }
 
   export type AcademyCreateNestedManyWithoutUsersInput = {
@@ -6808,6 +6909,12 @@ export namespace Prisma {
     connect?: PlanWhereUniqueInput
   }
 
+  export type AcademyCreateNestedOneWithoutSubscriptionsInput = {
+    create?: XOR<AcademyCreateWithoutSubscriptionsInput, AcademyUncheckedCreateWithoutSubscriptionsInput>
+    connectOrCreate?: AcademyCreateOrConnectWithoutSubscriptionsInput
+    connect?: AcademyWhereUniqueInput
+  }
+
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
   }
@@ -6826,6 +6933,14 @@ export namespace Prisma {
     upsert?: PlanUpsertWithoutStudentsInput
     connect?: PlanWhereUniqueInput
     update?: XOR<XOR<PlanUpdateToOneWithWhereWithoutStudentsInput, PlanUpdateWithoutStudentsInput>, PlanUncheckedUpdateWithoutStudentsInput>
+  }
+
+  export type AcademyUpdateOneRequiredWithoutSubscriptionsNestedInput = {
+    create?: XOR<AcademyCreateWithoutSubscriptionsInput, AcademyUncheckedCreateWithoutSubscriptionsInput>
+    connectOrCreate?: AcademyCreateOrConnectWithoutSubscriptionsInput
+    upsert?: AcademyUpsertWithoutSubscriptionsInput
+    connect?: AcademyWhereUniqueInput
+    update?: XOR<XOR<AcademyUpdateToOneWithWhereWithoutSubscriptionsInput, AcademyUpdateWithoutSubscriptionsInput>, AcademyUncheckedUpdateWithoutSubscriptionsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -6991,6 +7106,34 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutAcademiesInput, UserUncheckedCreateWithoutAcademiesInput>
   }
 
+  export type SubscriptionCreateWithoutAcademyInput = {
+    id?: string
+    start: Date | string
+    end: Date | string
+    active?: boolean
+    user: UserCreateNestedOneWithoutSubscriptionInput
+    plan: PlanCreateNestedOneWithoutStudentsInput
+  }
+
+  export type SubscriptionUncheckedCreateWithoutAcademyInput = {
+    id?: string
+    studentId: string
+    planId: string
+    start: Date | string
+    end: Date | string
+    active?: boolean
+  }
+
+  export type SubscriptionCreateOrConnectWithoutAcademyInput = {
+    where: SubscriptionWhereUniqueInput
+    create: XOR<SubscriptionCreateWithoutAcademyInput, SubscriptionUncheckedCreateWithoutAcademyInput>
+  }
+
+  export type SubscriptionCreateManyAcademyInputEnvelope = {
+    data: SubscriptionCreateManyAcademyInput | SubscriptionCreateManyAcademyInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithWhereUniqueWithoutAcademiesInput = {
     where: UserWhereUniqueInput
     update: XOR<UserUpdateWithoutAcademiesInput, UserUncheckedUpdateWithoutAcademiesInput>
@@ -7021,11 +7164,41 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
   }
 
+  export type SubscriptionUpsertWithWhereUniqueWithoutAcademyInput = {
+    where: SubscriptionWhereUniqueInput
+    update: XOR<SubscriptionUpdateWithoutAcademyInput, SubscriptionUncheckedUpdateWithoutAcademyInput>
+    create: XOR<SubscriptionCreateWithoutAcademyInput, SubscriptionUncheckedCreateWithoutAcademyInput>
+  }
+
+  export type SubscriptionUpdateWithWhereUniqueWithoutAcademyInput = {
+    where: SubscriptionWhereUniqueInput
+    data: XOR<SubscriptionUpdateWithoutAcademyInput, SubscriptionUncheckedUpdateWithoutAcademyInput>
+  }
+
+  export type SubscriptionUpdateManyWithWhereWithoutAcademyInput = {
+    where: SubscriptionScalarWhereInput
+    data: XOR<SubscriptionUpdateManyMutationInput, SubscriptionUncheckedUpdateManyWithoutAcademyInput>
+  }
+
+  export type SubscriptionScalarWhereInput = {
+    AND?: SubscriptionScalarWhereInput | SubscriptionScalarWhereInput[]
+    OR?: SubscriptionScalarWhereInput[]
+    NOT?: SubscriptionScalarWhereInput | SubscriptionScalarWhereInput[]
+    id?: StringFilter<"Subscription"> | string
+    studentId?: StringFilter<"Subscription"> | string
+    planId?: StringFilter<"Subscription"> | string
+    academyId?: StringFilter<"Subscription"> | string
+    start?: DateTimeFilter<"Subscription"> | Date | string
+    end?: DateTimeFilter<"Subscription"> | Date | string
+    active?: BoolFilter<"Subscription"> | boolean
+  }
+
   export type AcademyCreateWithoutUsersInput = {
     id?: string
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    subscriptions?: SubscriptionCreateNestedManyWithoutAcademyInput
   }
 
   export type AcademyUncheckedCreateWithoutUsersInput = {
@@ -7033,6 +7206,7 @@ export namespace Prisma {
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutAcademyInput
   }
 
   export type AcademyCreateOrConnectWithoutUsersInput = {
@@ -7042,11 +7216,11 @@ export namespace Prisma {
 
   export type SubscriptionCreateWithoutUserInput = {
     id?: string
-    academyId: string
     start: Date | string
     end: Date | string
     active?: boolean
     plan: PlanCreateNestedOneWithoutStudentsInput
+    academy: AcademyCreateNestedOneWithoutSubscriptionsInput
   }
 
   export type SubscriptionUncheckedCreateWithoutUserInput = {
@@ -7110,26 +7284,13 @@ export namespace Prisma {
     data: XOR<SubscriptionUpdateManyMutationInput, SubscriptionUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type SubscriptionScalarWhereInput = {
-    AND?: SubscriptionScalarWhereInput | SubscriptionScalarWhereInput[]
-    OR?: SubscriptionScalarWhereInput[]
-    NOT?: SubscriptionScalarWhereInput | SubscriptionScalarWhereInput[]
-    id?: StringFilter<"Subscription"> | string
-    studentId?: StringFilter<"Subscription"> | string
-    planId?: StringFilter<"Subscription"> | string
-    academyId?: StringFilter<"Subscription"> | string
-    start?: DateTimeFilter<"Subscription"> | Date | string
-    end?: DateTimeFilter<"Subscription"> | Date | string
-    active?: BoolFilter<"Subscription"> | boolean
-  }
-
   export type SubscriptionCreateWithoutPlanInput = {
     id?: string
-    academyId: string
     start: Date | string
     end: Date | string
     active?: boolean
     user: UserCreateNestedOneWithoutSubscriptionInput
+    academy: AcademyCreateNestedOneWithoutSubscriptionsInput
   }
 
   export type SubscriptionUncheckedCreateWithoutPlanInput = {
@@ -7215,6 +7376,27 @@ export namespace Prisma {
     create: XOR<PlanCreateWithoutStudentsInput, PlanUncheckedCreateWithoutStudentsInput>
   }
 
+  export type AcademyCreateWithoutSubscriptionsInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserCreateNestedManyWithoutAcademiesInput
+  }
+
+  export type AcademyUncheckedCreateWithoutSubscriptionsInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutAcademiesInput
+  }
+
+  export type AcademyCreateOrConnectWithoutSubscriptionsInput = {
+    where: AcademyWhereUniqueInput
+    create: XOR<AcademyCreateWithoutSubscriptionsInput, AcademyUncheckedCreateWithoutSubscriptionsInput>
+  }
+
   export type UserUpsertWithoutSubscriptionInput = {
     update: XOR<UserUpdateWithoutSubscriptionInput, UserUncheckedUpdateWithoutSubscriptionInput>
     create: XOR<UserCreateWithoutSubscriptionInput, UserUncheckedCreateWithoutSubscriptionInput>
@@ -7275,6 +7457,42 @@ export namespace Prisma {
     duration?: IntFieldUpdateOperationsInput | number
   }
 
+  export type AcademyUpsertWithoutSubscriptionsInput = {
+    update: XOR<AcademyUpdateWithoutSubscriptionsInput, AcademyUncheckedUpdateWithoutSubscriptionsInput>
+    create: XOR<AcademyCreateWithoutSubscriptionsInput, AcademyUncheckedCreateWithoutSubscriptionsInput>
+    where?: AcademyWhereInput
+  }
+
+  export type AcademyUpdateToOneWithWhereWithoutSubscriptionsInput = {
+    where?: AcademyWhereInput
+    data: XOR<AcademyUpdateWithoutSubscriptionsInput, AcademyUncheckedUpdateWithoutSubscriptionsInput>
+  }
+
+  export type AcademyUpdateWithoutSubscriptionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUpdateManyWithoutAcademiesNestedInput
+  }
+
+  export type AcademyUncheckedUpdateWithoutSubscriptionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutAcademiesNestedInput
+  }
+
+  export type SubscriptionCreateManyAcademyInput = {
+    id?: string
+    studentId: string
+    planId: string
+    start: Date | string
+    end: Date | string
+    active?: boolean
+  }
+
   export type UserUpdateWithoutAcademiesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -7310,6 +7528,33 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type SubscriptionUpdateWithoutAcademyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    start?: DateTimeFieldUpdateOperationsInput | Date | string
+    end?: DateTimeFieldUpdateOperationsInput | Date | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+    user?: UserUpdateOneRequiredWithoutSubscriptionNestedInput
+    plan?: PlanUpdateOneRequiredWithoutStudentsNestedInput
+  }
+
+  export type SubscriptionUncheckedUpdateWithoutAcademyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    studentId?: StringFieldUpdateOperationsInput | string
+    planId?: StringFieldUpdateOperationsInput | string
+    start?: DateTimeFieldUpdateOperationsInput | Date | string
+    end?: DateTimeFieldUpdateOperationsInput | Date | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SubscriptionUncheckedUpdateManyWithoutAcademyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    studentId?: StringFieldUpdateOperationsInput | string
+    planId?: StringFieldUpdateOperationsInput | string
+    start?: DateTimeFieldUpdateOperationsInput | Date | string
+    end?: DateTimeFieldUpdateOperationsInput | Date | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+  }
+
   export type SubscriptionCreateManyUserInput = {
     id?: string
     planId: string
@@ -7324,6 +7569,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    subscriptions?: SubscriptionUpdateManyWithoutAcademyNestedInput
   }
 
   export type AcademyUncheckedUpdateWithoutUsersInput = {
@@ -7331,6 +7577,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutAcademyNestedInput
   }
 
   export type AcademyUncheckedUpdateManyWithoutUsersInput = {
@@ -7342,11 +7589,11 @@ export namespace Prisma {
 
   export type SubscriptionUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    academyId?: StringFieldUpdateOperationsInput | string
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: DateTimeFieldUpdateOperationsInput | Date | string
     active?: BoolFieldUpdateOperationsInput | boolean
     plan?: PlanUpdateOneRequiredWithoutStudentsNestedInput
+    academy?: AcademyUpdateOneRequiredWithoutSubscriptionsNestedInput
   }
 
   export type SubscriptionUncheckedUpdateWithoutUserInput = {
@@ -7378,11 +7625,11 @@ export namespace Prisma {
 
   export type SubscriptionUpdateWithoutPlanInput = {
     id?: StringFieldUpdateOperationsInput | string
-    academyId?: StringFieldUpdateOperationsInput | string
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: DateTimeFieldUpdateOperationsInput | Date | string
     active?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutSubscriptionNestedInput
+    academy?: AcademyUpdateOneRequiredWithoutSubscriptionsNestedInput
   }
 
   export type SubscriptionUncheckedUpdateWithoutPlanInput = {
