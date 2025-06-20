@@ -1,13 +1,12 @@
-const jwt = require("jsonwebtoken");
 const { PrismaClient } = require("../../../prisma/generated/prisma");
+const jwt = require("jsonwebtoken");
 const prisma = new PrismaClient();
 require("dotenv").config();
-const router = require("express").Router();
 
 const SECRET = process.env.JWT_SECRET;
 const REFRESH_SECRET = process.env.JWT_SECRET_REFRESH;
 
-router.post("/", async (req, res) => {
+const login = async (req, res) => {
   try {
     const { academyId, accessId, userType } = req.body;
 
@@ -64,6 +63,6 @@ router.post("/", async (req, res) => {
       .status(500)
       .json({ message: "Erro ao realizar login", error: err.message });
   }
-});
+};
 
-module.exports = router;
+module.exports = { login };

@@ -80,7 +80,7 @@ const Login = () => {
     }
 
     axios
-      .post("http://localhost:3000/login", payload, { withCredentials: true })
+      .post("http://localhost:3000/auth", payload, { withCredentials: true })
       .then((response) => {
         if (response.status === 400) {
           toast.error(response.data.message);

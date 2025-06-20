@@ -39,11 +39,12 @@ const UserMenu = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const handleLogout = async () => {
-    await fetch("/logout", {
-      method: "POST",
-      credentials: "include",
-    });
+  const handleLogout = () => {
+    axios.post(
+      "http://localhost:3000/auth/logout",
+      {},
+      { withCredentials: true }
+    );
     localStorage.removeItem("academyId");
     navigate("/login");
   };
