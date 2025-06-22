@@ -18,6 +18,7 @@ model Academy {
   id            String         @id @default(cuid())
   name          String
   users         User[]         @relation("AcademyUsers")
+  plans         Plan[]
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   subscriptions Subscription[]
@@ -37,11 +38,13 @@ model User {
 }
 
 model Plan {
-  id       String         @id @default(cuid())
-  name     String
-  price    Decimal
-  duration Int
-  students Subscription[]
+  id        String         @id @default(cuid())
+  name      String
+  price     Decimal
+  duration  Int
+  academyId String
+  academy   Academy        @relation(fields: [academyId], references: [id])
+  students  Subscription[]
 }
 
 model Subscription {

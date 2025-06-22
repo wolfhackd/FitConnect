@@ -142,7 +142,8 @@ exports.Prisma.PlanScalarFieldEnum = {
   id: 'id',
   name: 'name',
   price: 'price',
-  duration: 'duration'
+  duration: 'duration',
+  academyId: 'academyId'
 };
 
 exports.Prisma.SubscriptionScalarFieldEnum = {
