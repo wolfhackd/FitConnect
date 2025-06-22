@@ -5,6 +5,8 @@ import { Label } from "@/components/ui/label";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
+import axios from "axios";
+import { toast, Toaster } from "sonner";
 
 const CreatePlan = () => {
   const [name, setName] = useState("");
@@ -16,13 +18,32 @@ const CreatePlan = () => {
     e.preventDefault();
     console.log({
       name,
-      price: parseFloat(price),
+      price: price.toString(),
       duration: parseInt(duration),
+      academyId: localStorage.getItem("academyId"),
     });
+
+    axios
+      .post("http://localhost:3000/plan/create", {
+        name,
+        price: price.toString(),
+        duration: parseInt(duration),
+        academyId: localStorage.getItem("academyId"),
+      })
+      .then((response) => {
+        toast.success(
+          "Plano " + response.data.plan.name + " criado com sucesso!"
+        );
+        navigate("/planos");
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
   };
 
   return (
     <LayoutAdmin>
+      <Toaster position="top-center" />
       <div className="bg-white mt-4 p-6 rounded-md shadow-md max-w-xl mx-auto ">
         {/* Botão de voltar estilizado */}
         <Button
@@ -52,7 +73,6 @@ const CreatePlan = () => {
             <Input
               id="price"
               type="number"
-              step="0.01"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
               placeholder="Ex: 99.90"
@@ -70,7 +90,7 @@ const CreatePlan = () => {
               required
             />
           </div>
-          <Button type="submit" className="w-full mt-4">
+          <Button type="submit" className="w-full mt-4 cursor-pointer">
             Criar Plano
           </Button>
         </form>

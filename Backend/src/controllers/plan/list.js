@@ -11,7 +11,7 @@ const listPlan = async (req, res) => {
     });
     return res.json(plans);
   } catch (error) {
-    console.log(error);
+    console.log({ message: "Erro ao listar planos" });
   }
 };
 

@@ -1,17 +1,33 @@
 import LayoutAdmin from "@/components/LayoutAdmin";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import axios from "axios";
 import { PlusCircle } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const PlanManager = () => {
-  //Vou importar as informações dos planos
-  const [data, setData] = useState([
-    { name: "Plano Mensal", price: 100.0, duration: 30 },
-    { name: "Plano Anual", price: 900.0, duration: 365 },
-  ]);
+  const [data, setData] = useState([]);
 
   const navigate = useNavigate();
+
+  const handleClick = (id) => {
+    //Construir a rota primeiro
+  };
+
+  useEffect(() => {
+    axios
+      .post("http://localhost:3000/plan/list", {
+        academyId: localStorage.getItem("academyId"),
+      })
+      .then((response) => {
+        setData(response.data);
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+      });
+  }, []);
 
   return (
     <LayoutAdmin>
@@ -19,15 +35,25 @@ const PlanManager = () => {
         {data.map((item, index) => (
           <Card
             key={index}
-            className="hover:shadow-lg transition duration-300 cursor-pointer"
+            className="hover:shadow-lg transition duration-300 cursor-pointer relative"
           >
+            <Button
+              type="submit"
+              variant="outline"
+              className={
+                "cursor-pointer hover:bg-[#1F2937] hover:text-white absolute top-2 left-2"
+              }
+              onClick={() => handleClick(item.id)}
+            >
+              Editar
+            </Button>
             <CardHeader>
               <CardTitle className="text-xl text-center">{item.name}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2 text-center">
               <p className="text-muted-foreground">Valor:</p>
               <p className="text-lg font-semibold text-green-600">
-                R$ {item.price.toFixed(2)}
+                R$ {item.price}
               </p>
               <p className="text-muted-foreground">Duração:</p>
               <p className="text-base">{item.duration} dias</p>
