@@ -43,7 +43,7 @@ const Login = () => {
   const navigate = useNavigate();
   React.useEffect(() => {
     axios
-      .get("http://localhost:3000/academy")
+      .get("http://localhost:3000/academy/list")
       .then((response) => {
         const academies = response.data;
         const formatedItems = academies.map((item) => ({

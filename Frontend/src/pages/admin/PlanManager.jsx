@@ -5,16 +5,19 @@ import axios from "axios";
 import { PlusCircle } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast, Toaster } from "sonner";
 
 const PlanManager = () => {
   const [data, setData] = useState([]);
 
   const navigate = useNavigate();
 
-  const handleClick = (id) => {
+  const handleClick = (planId) => {
     //Construir a rota primeiro
+    //Botão de editar
   };
 
+  //Buscando os planos
   useEffect(() => {
     axios
       .post("http://localhost:3000/plan/list", {
@@ -25,12 +28,13 @@ const PlanManager = () => {
         console.log(response.data);
       })
       .catch((err) => {
-        console.log(err.response.data.message);
+        toast.error(err.response.data.message);
       });
   }, []);
 
   return (
     <LayoutAdmin>
+      <Toaster />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
         {data.map((item, index) => (
           <Card

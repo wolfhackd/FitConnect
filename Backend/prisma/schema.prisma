@@ -15,36 +15,45 @@ datasource db {
 }
 
 model Academy {
-  id          String   @id @default(cuid())
-  name        String
-  users       User[]    @relation("AcademyUsers") 
-  plans       Plan[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id            String         @id @default(cuid())
+  name          String
+  users         User[]         @relation("AcademyUsers")
+  students      Student[]      @relation("AcademyStudents")
+  plans         Plan[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
   subscriptions Subscription[]
 }
 
 model User {
-  id          String     @id @default(cuid())
-  name        String
-  cpf         String        @unique
-  birth       DateTime
-  phone       String
-  userType    Int        @default(0)
-  academies   Academy[]  @relation("AcademyUsers")
-  subscription Subscription[]
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id        String    @id @default(cuid())
+  name      String
+  cpf       String    @unique
+  birth     DateTime
+  phone     String
+  userType  Int       @default(0)
+  academies Academy[] @relation("AcademyUsers")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Student   Student?
+}
+
+model Student {
+  id            String         @id @default(cuid())
+  userId        String         @unique
+  user          User           @relation(fields: [userId], references: [id])
+  academies     Academy[]      @relation("AcademyStudents")
+  subscriptions Subscription[]
 }
 
 model Plan {
-  id          String   @id @default(cuid())
-  name        String
-  price       Decimal
-  duration    Int       
-  academyId   String
-  academy     Academy   @relation(fields: [academyId], references: [id])
-  students    Subscription[]
+  id        String         @id @default(cuid())
+  name      String
+  price     Decimal
+  duration  Int
+  academyId String
+  academy   Academy        @relation(fields: [academyId], references: [id])
+  students  Subscription[]
 }
 
 model Subscription {
@@ -55,7 +64,7 @@ model Subscription {
   start     DateTime
   end       DateTime
   active    Boolean  @default(true)
-  user      User     @relation(fields: [studentId], references: [id])
+  student   Student  @relation(fields: [studentId], references: [id])
   plan      Plan     @relation(fields: [planId], references: [id])
   academy   Academy  @relation(fields: [academyId], references: [id])
 }

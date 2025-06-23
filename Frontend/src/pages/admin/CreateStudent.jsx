@@ -3,22 +3,15 @@ import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Toaster, toast } from "sonner";
 import { DatePicker } from "@/components/DatePicker";
 import { ChevronLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const CreateStudent = () => {
   const [name, setName] = useState("");
   const [cpf, setCpf] = useState("");
-  const [plano, setPlano] = useState("");
   const [birth, setBirth] = useState(null);
   const [phone, setPhone] = useState("");
 
@@ -27,7 +20,7 @@ const CreateStudent = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!name || !cpf || !plano || !birth || !phone) {
+    if (!name || !cpf || !birth || !phone) {
       toast.error("Preencha todos os campos.");
       return;
     }
@@ -39,17 +32,29 @@ const CreateStudent = () => {
 
     const data = new Date(birth).toISOString();
 
-    toast.success(`Aluno cadastrado com sucesso! 🎉`);
-
     console.log({
       name,
       cpf,
-      plano,
-      data,
+      birth: data,
       phone,
+      academyId: localStorage.getItem("academyId"),
     });
 
-    // Envio para API viria aqui
+    axios
+      .post("http://localhost:3000/student/create", {
+        name,
+        cpf,
+        birth: data,
+        phone,
+        academyId: localStorage.getItem("academyId"),
+      })
+      .then((res) => {
+        console.log(res.data);
+        navigate("/alunos");
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
   };
 
   return (
@@ -101,21 +106,6 @@ const CreateStudent = () => {
               onChange={(e) => setCpf(e.target.value)}
               required
             />
-          </div>
-
-          <div>
-            <Label htmlFor="plan">Plano</Label>
-            <Select onValueChange={setPlano}>
-              <SelectTrigger>
-                <SelectValue placeholder="Escolha um plano" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="mensal">Mensal</SelectItem>
-                <SelectItem value="mensalPlus">Mensal Plus</SelectItem>
-                <SelectItem value="anual">Anual</SelectItem>
-                <SelectItem value="anualPlus">Anual Plus</SelectItem>
-              </SelectContent>
-            </Select>
           </div>
 
           <div>

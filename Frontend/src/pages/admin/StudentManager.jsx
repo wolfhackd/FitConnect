@@ -108,7 +108,17 @@ const StudentManager = () => {
         <div className="gap-4 grid grid-cols-5">
           {users.map((user) => {
             return (
-              <Card className={"w-80"}>
+              <Card className={"w-80 relative"}>
+                <Button
+                  type="submit"
+                  variant="outline"
+                  className={
+                    "cursor-pointer hover:bg-[#1F2937] hover:text-white absolute top-2 left-2"
+                  }
+                  onClick={() => handleClick(user.id)}
+                >
+                  Editar
+                </Button>
                 <CardHeader className={"justify-center"}>
                   <CardTitle>
                     <Avatar>

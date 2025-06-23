@@ -3,6 +3,7 @@ const cookieParser = require("cookie-parser");
 const academyRoutes = require("./src/routes/academy/index.js");
 const loginRoutes = require("./src/routes/login/index.js");
 const planRoutes = require("./src/routes/plan/index.js");
+const studentRoutes = require("./src/routes/student/index.js");
 const cors = require("cors");
 const app = express();
 
@@ -15,9 +16,10 @@ app.use(
   })
 );
 
-app.use("/academy", academyRoutes);
-app.use("/auth", loginRoutes);
-app.use("/plan", planRoutes);
+app.use("/academy", academyRoutes); //Funcionando
+app.use("/auth", loginRoutes); //Funcionando
+app.use("/plan", planRoutes); //Funcionando
+app.use("/student", studentRoutes);
 
 app.listen(3000, () => {
   console.log("Sevidor rodando em http://localhost:3000");

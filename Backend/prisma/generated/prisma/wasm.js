@@ -138,6 +138,11 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.StudentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId'
+};
+
 exports.Prisma.PlanScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -170,6 +175,7 @@ exports.Prisma.QueryMode = {
 exports.Prisma.ModelName = {
   Academy: 'Academy',
   User: 'User',
+  Student: 'Student',
   Plan: 'Plan',
   Subscription: 'Subscription'
 };
