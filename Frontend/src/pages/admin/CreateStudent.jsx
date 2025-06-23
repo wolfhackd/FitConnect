@@ -1,5 +1,5 @@
 import LayoutAdmin from "@/components/LayoutAdmin";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -7,13 +7,22 @@ import { Toaster, toast } from "sonner";
 import { DatePicker } from "@/components/DatePicker";
 import { ChevronLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import axios from "axios";
 
 const CreateStudent = () => {
   const [name, setName] = useState("");
   const [cpf, setCpf] = useState("");
+  const [plano, setPlano] = useState("");
   const [birth, setBirth] = useState(null);
   const [phone, setPhone] = useState("");
+  const [datainput, setDatainput] = useState([]);
 
   const navigate = useNavigate();
 
@@ -38,6 +47,7 @@ const CreateStudent = () => {
       birth: data,
       phone,
       academyId: localStorage.getItem("academyId"),
+      plano,
     });
 
     axios
@@ -47,6 +57,7 @@ const CreateStudent = () => {
         birth: data,
         phone,
         academyId: localStorage.getItem("academyId"),
+        planId: plano,
       })
       .then((res) => {
         console.log(res.data);
@@ -56,6 +67,19 @@ const CreateStudent = () => {
         toast.error(err.response.data.message);
       });
   };
+
+  useEffect(() => {
+    axios
+      .post("http://localhost:3000/plan/list", {
+        academyId: localStorage.getItem("academyId"),
+      })
+      .then((res) => {
+        setDatainput(res.data);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
+  }, []);
 
   return (
     <LayoutAdmin>
@@ -106,6 +130,24 @@ const CreateStudent = () => {
               onChange={(e) => setCpf(e.target.value)}
               required
             />
+          </div>
+
+          <div>
+            <Label htmlFor="plan">Plano</Label>
+            <Select onValueChange={setPlano}>
+              <SelectTrigger>
+                <SelectValue placeholder="Escolha um plano" />
+              </SelectTrigger>
+              <SelectContent>
+                {/* <SelectItem value="mensal">Mensal</SelectItem>
+                <SelectItem value="mensalPlus">Mensal Plus</SelectItem>
+                <SelectItem value="anual">Anual</SelectItem>
+                <SelectItem value="anualPlus">Anual Plus</SelectItem> */}
+                {datainput.map((item) => (
+                  <SelectItem value={item.id}>{item.name}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
           <div>

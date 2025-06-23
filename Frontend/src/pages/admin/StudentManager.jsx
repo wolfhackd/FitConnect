@@ -54,6 +54,7 @@ const StudentManager = () => {
       })
       .then((response) => {
         setUsers(response.data.users);
+        console.log(response.data.users);
       })
       .catch((err) => {
         console.log(err.response.data.message);
@@ -108,7 +109,7 @@ const StudentManager = () => {
         <div className="gap-4 grid grid-cols-5">
           {users.map((user) => {
             return (
-              <Card className={"w-80 relative"}>
+              <Card className={"w-80 relative"} key={user.id}>
                 <Button
                   type="submit"
                   variant="outline"
