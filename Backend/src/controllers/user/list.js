@@ -2,12 +2,16 @@ const { PrismaClient } = require("../../../prisma/generated/prisma");
 const prisma = new PrismaClient();
 
 const listUsers = async (req, res) => {
-  const { academyId, status, studentId } = req.body;
+  const { academyId, userType, studentId, status } = req.body;
   try {
     const filterConditions = {};
 
     if (status !== null && status !== undefined && status !== "") {
       filterConditions.status = status;
+    }
+
+    if (userType !== null && userType !== undefined && userType !== "") {
+      filterConditions.userType = userType;
     }
 
     if (studentId !== null && studentId !== undefined && studentId !== "") {

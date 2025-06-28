@@ -2559,6 +2559,7 @@ export namespace Prisma {
     cpf: string | null
     birth: Date | null
     phone: string | null
+    status: boolean | null
     userType: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2570,6 +2571,7 @@ export namespace Prisma {
     cpf: string | null
     birth: Date | null
     phone: string | null
+    status: boolean | null
     userType: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2581,6 +2583,7 @@ export namespace Prisma {
     cpf: number
     birth: number
     phone: number
+    status: number
     userType: number
     createdAt: number
     updatedAt: number
@@ -2602,6 +2605,7 @@ export namespace Prisma {
     cpf?: true
     birth?: true
     phone?: true
+    status?: true
     userType?: true
     createdAt?: true
     updatedAt?: true
@@ -2613,6 +2617,7 @@ export namespace Prisma {
     cpf?: true
     birth?: true
     phone?: true
+    status?: true
     userType?: true
     createdAt?: true
     updatedAt?: true
@@ -2624,6 +2629,7 @@ export namespace Prisma {
     cpf?: true
     birth?: true
     phone?: true
+    status?: true
     userType?: true
     createdAt?: true
     updatedAt?: true
@@ -2722,6 +2728,7 @@ export namespace Prisma {
     cpf: string
     birth: Date
     phone: string
+    status: boolean
     userType: number
     createdAt: Date
     updatedAt: Date
@@ -2752,6 +2759,7 @@ export namespace Prisma {
     cpf?: boolean
     birth?: boolean
     phone?: boolean
+    status?: boolean
     userType?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2766,6 +2774,7 @@ export namespace Prisma {
     cpf?: boolean
     birth?: boolean
     phone?: boolean
+    status?: boolean
     userType?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2777,6 +2786,7 @@ export namespace Prisma {
     cpf?: boolean
     birth?: boolean
     phone?: boolean
+    status?: boolean
     userType?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2788,12 +2798,13 @@ export namespace Prisma {
     cpf?: boolean
     birth?: boolean
     phone?: boolean
+    status?: boolean
     userType?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "cpf" | "birth" | "phone" | "userType" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "cpf" | "birth" | "phone" | "status" | "userType" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     academies?: boolean | User$academiesArgs<ExtArgs>
     Student?: boolean | User$StudentArgs<ExtArgs>
@@ -2814,6 +2825,7 @@ export namespace Prisma {
       cpf: string
       birth: Date
       phone: string
+      status: boolean
       userType: number
       createdAt: Date
       updatedAt: Date
@@ -3247,6 +3259,7 @@ export namespace Prisma {
     readonly cpf: FieldRef<"User", 'String'>
     readonly birth: FieldRef<"User", 'DateTime'>
     readonly phone: FieldRef<"User", 'String'>
+    readonly status: FieldRef<"User", 'Boolean'>
     readonly userType: FieldRef<"User", 'Int'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
@@ -7032,6 +7045,7 @@ export namespace Prisma {
     cpf: 'cpf',
     birth: 'birth',
     phone: 'phone',
+    status: 'status',
     userType: 'userType',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -7122,6 +7136,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -7146,13 +7167,6 @@ export namespace Prisma {
    * Reference to a field of type 'Decimal[]'
    */
   export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -7241,6 +7255,7 @@ export namespace Prisma {
     cpf?: StringFilter<"User"> | string
     birth?: DateTimeFilter<"User"> | Date | string
     phone?: StringFilter<"User"> | string
+    status?: BoolFilter<"User"> | boolean
     userType?: IntFilter<"User"> | number
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
@@ -7254,6 +7269,7 @@ export namespace Prisma {
     cpf?: SortOrder
     birth?: SortOrder
     phone?: SortOrder
+    status?: SortOrder
     userType?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -7270,6 +7286,7 @@ export namespace Prisma {
     name?: StringFilter<"User"> | string
     birth?: DateTimeFilter<"User"> | Date | string
     phone?: StringFilter<"User"> | string
+    status?: BoolFilter<"User"> | boolean
     userType?: IntFilter<"User"> | number
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
@@ -7283,6 +7300,7 @@ export namespace Prisma {
     cpf?: SortOrder
     birth?: SortOrder
     phone?: SortOrder
+    status?: SortOrder
     userType?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -7302,6 +7320,7 @@ export namespace Prisma {
     cpf?: StringWithAggregatesFilter<"User"> | string
     birth?: DateTimeWithAggregatesFilter<"User"> | Date | string
     phone?: StringWithAggregatesFilter<"User"> | string
+    status?: BoolWithAggregatesFilter<"User"> | boolean
     userType?: IntWithAggregatesFilter<"User"> | number
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -7555,6 +7574,7 @@ export namespace Prisma {
     cpf: string
     birth: Date | string
     phone: string
+    status?: boolean
     userType?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7568,6 +7588,7 @@ export namespace Prisma {
     cpf: string
     birth: Date | string
     phone: string
+    status?: boolean
     userType?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7581,6 +7602,7 @@ export namespace Prisma {
     cpf?: StringFieldUpdateOperationsInput | string
     birth?: DateTimeFieldUpdateOperationsInput | Date | string
     phone?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
     userType?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7594,6 +7616,7 @@ export namespace Prisma {
     cpf?: StringFieldUpdateOperationsInput | string
     birth?: DateTimeFieldUpdateOperationsInput | Date | string
     phone?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
     userType?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7607,6 +7630,7 @@ export namespace Prisma {
     cpf: string
     birth: Date | string
     phone: string
+    status?: boolean
     userType?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7618,6 +7642,7 @@ export namespace Prisma {
     cpf?: StringFieldUpdateOperationsInput | string
     birth?: DateTimeFieldUpdateOperationsInput | Date | string
     phone?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
     userType?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7629,6 +7654,7 @@ export namespace Prisma {
     cpf?: StringFieldUpdateOperationsInput | string
     birth?: DateTimeFieldUpdateOperationsInput | Date | string
     phone?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
     userType?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7921,6 +7947,11 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -7953,6 +7984,7 @@ export namespace Prisma {
     cpf?: SortOrder
     birth?: SortOrder
     phone?: SortOrder
+    status?: SortOrder
     userType?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -7968,6 +8000,7 @@ export namespace Prisma {
     cpf?: SortOrder
     birth?: SortOrder
     phone?: SortOrder
+    status?: SortOrder
     userType?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -7979,6 +8012,7 @@ export namespace Prisma {
     cpf?: SortOrder
     birth?: SortOrder
     phone?: SortOrder
+    status?: SortOrder
     userType?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -7986,6 +8020,14 @@ export namespace Prisma {
 
   export type UserSumOrderByAggregateInput = {
     userType?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -8090,11 +8132,6 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type StudentScalarRelationFilter = {
     is?: StudentWhereInput
     isNot?: StudentWhereInput
@@ -8133,14 +8170,6 @@ export namespace Prisma {
     start?: SortOrder
     end?: SortOrder
     active?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type UserCreateNestedManyWithoutAcademiesInput = {
@@ -8333,6 +8362,10 @@ export namespace Prisma {
     create?: XOR<StudentCreateWithoutUserInput, StudentUncheckedCreateWithoutUserInput>
     connectOrCreate?: StudentCreateOrConnectWithoutUserInput
     connect?: StudentWhereUniqueInput
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -8565,10 +8598,6 @@ export namespace Prisma {
     connect?: AcademyWhereUniqueInput
   }
 
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
-  }
-
   export type StudentUpdateOneRequiredWithoutSubscriptionsNestedInput = {
     create?: XOR<StudentCreateWithoutSubscriptionsInput, StudentUncheckedCreateWithoutSubscriptionsInput>
     connectOrCreate?: StudentCreateOrConnectWithoutSubscriptionsInput
@@ -8660,6 +8689,19 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -8714,25 +8756,13 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
   export type UserCreateWithoutAcademiesInput = {
     id?: string
     name: string
     cpf: string
     birth: Date | string
     phone: string
+    status?: boolean
     userType?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -8745,6 +8775,7 @@ export namespace Prisma {
     cpf: string
     birth: Date | string
     phone: string
+    status?: boolean
     userType?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -8852,6 +8883,7 @@ export namespace Prisma {
     cpf?: StringFilter<"User"> | string
     birth?: DateTimeFilter<"User"> | Date | string
     phone?: StringFilter<"User"> | string
+    status?: BoolFilter<"User"> | boolean
     userType?: IntFilter<"User"> | number
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
@@ -9034,6 +9066,7 @@ export namespace Prisma {
     cpf: string
     birth: Date | string
     phone: string
+    status?: boolean
     userType?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -9046,6 +9079,7 @@ export namespace Prisma {
     cpf: string
     birth: Date | string
     phone: string
+    status?: boolean
     userType?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -9127,6 +9161,7 @@ export namespace Prisma {
     cpf?: StringFieldUpdateOperationsInput | string
     birth?: DateTimeFieldUpdateOperationsInput | Date | string
     phone?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
     userType?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9139,6 +9174,7 @@ export namespace Prisma {
     cpf?: StringFieldUpdateOperationsInput | string
     birth?: DateTimeFieldUpdateOperationsInput | Date | string
     phone?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
     userType?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9443,6 +9479,7 @@ export namespace Prisma {
     cpf?: StringFieldUpdateOperationsInput | string
     birth?: DateTimeFieldUpdateOperationsInput | Date | string
     phone?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
     userType?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9455,6 +9492,7 @@ export namespace Prisma {
     cpf?: StringFieldUpdateOperationsInput | string
     birth?: DateTimeFieldUpdateOperationsInput | Date | string
     phone?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
     userType?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9467,6 +9505,7 @@ export namespace Prisma {
     cpf?: StringFieldUpdateOperationsInput | string
     birth?: DateTimeFieldUpdateOperationsInput | Date | string
     phone?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
     userType?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

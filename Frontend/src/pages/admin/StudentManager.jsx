@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,7 +9,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import axios from "axios";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Avatar } from "@radix-ui/react-avatar";
 import { AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { User } from "lucide-react";
@@ -17,22 +23,27 @@ import { useNavigate } from "react-router-dom";
 import LayoutAdmin from "@/components/LayoutAdmin";
 
 const StudentManager = () => {
-  const [status, setStatus] = React.useState("");
   const [statusInput, setStatusInput] = React.useState("");
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const itemsPerPage = 20;
   const [inputValue, setInputValue] = React.useState("");
   const [users, setUsers] = React.useState([]);
 
   const navigate = useNavigate();
 
-  React.useEffect(() => {
-    if (statusInput === "all") {
-      setStatus(null);
-    } else if (statusInput === "active") {
-      setStatus(1);
-    } else if (statusInput === "inactive") {
-      setStatus(0);
-    }
-  }, [statusInput]);
+  const indexOfLastUser = currentPage * itemsPerPage;
+  const indexOfFirstUser = indexOfLastUser - itemsPerPage;
+  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+
+  const totalPages = Math.ceil(users.length / itemsPerPage);
+
+  function goToNextPage() {
+    if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
+  }
+
+  function goToPreviousPage() {
+    if (currentPage > 1) setCurrentPage((prev) => prev - 1);
+  }
 
   function handleInput(e) {
     setInputValue(e.target.value);
@@ -41,11 +52,20 @@ const StudentManager = () => {
   function handleClick() {
     const academyId = localStorage.getItem("academyId");
     const studentId = inputValue;
+    let status = null;
+    if (statusInput === "all") {
+      status = null;
+    } else if (statusInput === "active") {
+      status = true;
+    } else if (statusInput === "inactive") {
+      status = false;
+    }
 
     const payload = {
       academyId,
       studentId,
       status,
+      userType: 0,
     };
 
     axios
@@ -59,6 +79,15 @@ const StudentManager = () => {
       .catch((err) => {
         console.log(err.response.data.message);
       });
+  }
+
+  useEffect(() => {
+    handleClick();
+  }, []);
+
+  function handleClickEdit(user) {
+    navigate("/alunos/editar", { state: { user } });
+    //Tá faltando terminar (Só tem essa parte feita, falta o restante)
   }
 
   return (
@@ -107,7 +136,7 @@ const StudentManager = () => {
           <span>Nenhum aluno encontrado ou pesquisa inválida</span>
         )}
         <div className="gap-4 grid grid-cols-5">
-          {users.map((user) => {
+          {currentUsers.map((user) => {
             return (
               <Card className={"w-80 relative"} key={user.id}>
                 <Button
@@ -116,11 +145,23 @@ const StudentManager = () => {
                   className={
                     "cursor-pointer hover:bg-[#1F2937] hover:text-white absolute top-2 left-2"
                   }
-                  onClick={() => handleClick(user.id)}
+                  onClick={() => handleClickEdit(user.id)}
                 >
                   Editar
                 </Button>
+                <span
+                  className={`absolute top-2 right-2 px-2 py-1 text-xs rounded-full font-medium ${
+                    user.status
+                      ? "bg-green-200 text-green-800"
+                      : "bg-gray-300 text-gray-700"
+                  }`}
+                >
+                  {user.status ? "Ativo" : "Inativo"}
+                </span>
                 <CardHeader className={"justify-center"}>
+                  {/* <CardAction>
+                    {user.status == true ? "Ativo" : "Inativo"}
+                  </CardAction> */}
                   <CardTitle>
                     <Avatar>
                       <AvatarImage
@@ -129,7 +170,7 @@ const StudentManager = () => {
                         className="rounded-full w-24 h-24"
                       />
                       <AvatarFallback>
-                        <User className="rounded-full size-10 bg-gray-200 text-gray-600" />
+                        <User className="rounded-full size-24 bg-gray-200 text-gray-600" />
                       </AvatarFallback>
                     </Avatar>
                   </CardTitle>
@@ -146,6 +187,31 @@ const StudentManager = () => {
             );
           })}
         </div>
+      </div>
+      <div
+        className={`mt-4 flex justify-center items-center gap-4 w-full rounded-md self-center ${
+          users.length === 0 && "hidden"
+        }`}
+      >
+        <Button
+          variant="outline"
+          onClick={goToPreviousPage}
+          disabled={currentPage === 1}
+          className={"cursor-pointer"}
+        >
+          Anterior
+        </Button>
+        <span>
+          Página {currentPage} de {totalPages}
+        </span>
+        <Button
+          variant="outline"
+          onClick={goToNextPage}
+          disabled={currentPage === totalPages}
+          className={"cursor-pointer"}
+        >
+          Próxima
+        </Button>
       </div>
     </LayoutAdmin>
   );
