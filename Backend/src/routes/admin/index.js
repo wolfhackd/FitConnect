@@ -1,7 +1,9 @@
-const { createAdmin } = require("../../controllers/user/createAdmin");
+const {
+  createSupervisor,
+} = require("../../controllers/admin/createSupervisor");
 
 const route = require("express").Router();
 
-route.post("/create", createAdmin);
+route.post("/create", createSupervisor);
 
 module.exports = route;

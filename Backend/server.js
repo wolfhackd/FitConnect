@@ -20,8 +20,8 @@ app.use(
 app.use("/academy", academyRoutes); //Funcionando
 app.use("/auth", loginRoutes); //Funcionando
 app.use("/plan", planRoutes); //Funcionando
-app.use("/student", studentRoutes);
-app.use("/admin", adminRoutes);
+app.use("/student", studentRoutes); //Funcionando
+app.use("/admin", adminRoutes); //Funcionando
 
 app.listen(3000, () => {
   console.log("Sevidor rodando em http://localhost:3000");

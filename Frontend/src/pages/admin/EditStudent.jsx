@@ -65,6 +65,7 @@ const EditStudent = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const id = user.id;
 
     if (!name || !cpf || !birth || !phone) {
       toast.error("Preencha todos os campos.");
@@ -79,6 +80,7 @@ const EditStudent = () => {
     const data = new Date(birth).toISOString();
 
     console.log({
+      id,
       name,
       cpf,
       birth: data,
@@ -87,6 +89,24 @@ const EditStudent = () => {
       plano,
     });
     //falta termimnar isso
+
+    axios
+      .post("http://localhost:3000/student/update", {
+        id,
+        name,
+        cpf,
+        birth: data,
+        phone,
+        academyId: localStorage.getItem("academyId"),
+        plano,
+      })
+      .then((res) => {
+        toast.success("Aluno atualizado com sucesso");
+        navigate("/alunos");
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
   };
 
   return (

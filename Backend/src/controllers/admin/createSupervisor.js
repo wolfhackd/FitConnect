@@ -1,7 +1,8 @@
 const { PrismaClient } = require("../../../prisma/generated/prisma");
 const prisma = new PrismaClient();
 
-const createAdmin = async (req, res) => {
+//Fazer um protetor de rota e colocar admin na rota
+const createSupervisor = async (req, res) => {
   try {
     const { name, cpf, birth, phone, userType = 1, academyId } = req.body;
 
@@ -42,4 +43,4 @@ const createAdmin = async (req, res) => {
   }
 };
 
-module.exports = { createAdmin };
+module.exports = { createSupervisor };
