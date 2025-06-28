@@ -28,7 +28,7 @@ model Academy {
 model User {
   id        String    @id @default(cuid())
   name      String
-  cpf       String    @unique
+  cpf       String      
   birth     DateTime
   phone     String
   status    Boolean   @default(true)

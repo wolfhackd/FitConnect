@@ -7279,11 +7279,11 @@ export namespace Prisma {
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    cpf?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     name?: StringFilter<"User"> | string
+    cpf?: StringFilter<"User"> | string
     birth?: DateTimeFilter<"User"> | Date | string
     phone?: StringFilter<"User"> | string
     status?: BoolFilter<"User"> | boolean
@@ -7292,7 +7292,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     academies?: AcademyListRelationFilter
     Student?: XOR<StudentNullableScalarRelationFilter, StudentWhereInput> | null
-  }, "id" | "cpf">
+  }, "id">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder

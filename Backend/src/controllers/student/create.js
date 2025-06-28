@@ -14,8 +14,21 @@ const createStudent = async (req, res) => {
       start,
     } = req.body;
 
+    //Anotação
+    //fazer algo em relação do user já existir e for um admin
+
     // Verifica se o usuário já existe
-    const existingUser = await prisma.user.findUnique({ where: { cpf } });
+    const existingUser = await prisma.user.findFirst({
+      where: {
+        cpf,
+        userType,
+        academies: {
+          some: {
+            id: academyId,
+          },
+        },
+      },
+    });
     if (existingUser) {
       return res
         .status(409)

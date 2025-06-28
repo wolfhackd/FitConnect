@@ -74,7 +74,6 @@ const StudentManager = () => {
       })
       .then((response) => {
         setUsers(response.data.users);
-        console.log(response.data.users);
       })
       .catch((err) => {
         console.log(err.response.data.message);

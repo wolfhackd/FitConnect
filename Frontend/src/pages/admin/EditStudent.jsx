@@ -86,6 +86,7 @@ const EditStudent = () => {
       academyId: localStorage.getItem("academyId"),
       plano,
     });
+    //falta termimnar isso
   };
 
   return (
