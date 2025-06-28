@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { AlignJustify, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { openLinks } from "@/utils/openLinks";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const navBarFunctions = [
     { label: "Sobre", link: "#about" },
@@ -35,7 +36,7 @@ const Navbar = () => {
                   size={"sm"}
                   className={"text-white"}
                   onClick={() => {
-                    openLinks(item.link);
+                    navigate(item.link);
                   }}
                 >
                   {item.label}
@@ -46,9 +47,7 @@ const Navbar = () => {
               variant={"destructive"}
               className={"cursor-pointer"}
               onClick={() => {
-                // adicionar pagina de login
-                // openLinks("/login", true);
-                openLinks("/login");
+                navigate("/login");
               }}
             >
               Login
@@ -64,7 +63,7 @@ const Navbar = () => {
                 variant={"link"}
                 className={"text-white cursor-pointer text-xl"}
                 onClick={() => {
-                  openLinks(item.link);
+                  navigate(item.link);
                 }}
               >
                 {item.label}
@@ -75,9 +74,7 @@ const Navbar = () => {
             variant={"destructive"}
             className={"cursor-pointer"}
             onClick={() => {
-              // adicionar pagina de login
-              // openLinks("/login", true);
-              openLinks("/login");
+              navigate("/login");
             }}
           >
             Login

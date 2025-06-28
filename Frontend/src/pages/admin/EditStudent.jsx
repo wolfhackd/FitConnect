@@ -1,23 +1,29 @@
 import LayoutAdmin from "@/components/LayoutAdmin";
-import React, { useEffect, useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Toaster, toast } from "sonner";
-import { DatePicker } from "@/components/DatePicker";
-import { ChevronLeft } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Input } from "@/components/ui/input";
 import {
   Select,
-  SelectContent,
-  SelectItem,
   SelectTrigger,
   SelectValue,
+  SelectContent,
+  SelectItem,
 } from "@/components/ui/select";
-import axios from "axios";
+import { ChevronLeft } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Label } from "@/components/ui/label";
+import { Toaster, toast } from "sonner";
+import { DatePicker } from "@/components/DatePicker";
 import { planSearch } from "@/utils/PlanSearch";
+import axios from "axios";
 
-const CreateStudent = () => {
+const EditStudent = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const user = location.state.user;
+  // console.log(user);
+
+  //Dados do formulário
   const [name, setName] = useState("");
   const [cpf, setCpf] = useState("");
   const [plano, setPlano] = useState("");
@@ -25,7 +31,37 @@ const CreateStudent = () => {
   const [phone, setPhone] = useState("");
   const [datainput, setDatainput] = useState([]);
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    if (user) {
+      setName(user.name);
+      setCpf(user.cpf);
+      setBirth(user.birth);
+      setPhone(user.phone);
+      //   setPlano(user.plano); é outra tabela
+    }
+  }, [user]);
+
+  //buscar Planos
+  //Tenho que buscar a tabela de plano com esse usuario e mostrar o plano dele
+  useEffect(() => {
+    const academyId = localStorage.getItem("academyId");
+
+    planSearch(academyId)
+      .then((data) => setDatainput(data))
+      .catch((err) => toast.error(err.response?.data?.message));
+
+    axios
+      .post("http://localhost:3000/plan/getPlanByUser", {
+        id: user.id,
+        academyId: localStorage.getItem("academyId"),
+      })
+      .then((res) => {
+        setPlano(res.data.plans[0].plano.id);
+      })
+      .catch((err) => {
+        toast.error(err.response?.data?.message);
+      });
+  }, [user.id]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,32 +78,15 @@ const CreateStudent = () => {
 
     const data = new Date(birth).toISOString();
 
-    axios
-      .post("http://localhost:3000/student/create", {
-        name,
-        cpf,
-        birth: data,
-        phone,
-        academyId: localStorage.getItem("academyId"),
-        planId: plano,
-      })
-      .then((res) => {
-        console.log(res.data);
-        navigate("/alunos");
-      })
-      .catch((err) => {
-        toast.error(err.response.data.message);
-      });
+    console.log({
+      name,
+      cpf,
+      birth: data,
+      phone,
+      academyId: localStorage.getItem("academyId"),
+      plano,
+    });
   };
-
-  // Buscar planos
-  useEffect(() => {
-    const academyId = localStorage.getItem("academyId");
-
-    planSearch(academyId)
-      .then((data) => setDatainput(data))
-      .catch((err) => toast.error(err.response?.data?.message));
-  }, []);
 
   return (
     <LayoutAdmin>
@@ -83,7 +102,7 @@ const CreateStudent = () => {
           Voltar
         </Button>
 
-        <h1 className="text-2xl font-bold mb-6">Cadastro de Aluno</h1>
+        <h1 className="text-2xl font-bold mb-6">Edição de Aluno</h1>
 
         <form onSubmit={(e) => handleSubmit(e)} className="space-y-4">
           <div>
@@ -122,17 +141,15 @@ const CreateStudent = () => {
 
           <div>
             <Label htmlFor="plan">Plano</Label>
-            <Select onValueChange={setPlano}>
+            <Select value={plano} onValueChange={setPlano}>
               <SelectTrigger>
                 <SelectValue placeholder="Escolha um plano" />
               </SelectTrigger>
               <SelectContent>
-                {/* <SelectItem value="mensal">Mensal</SelectItem>
-                <SelectItem value="mensalPlus">Mensal Plus</SelectItem>
-                <SelectItem value="anual">Anual</SelectItem>
-                <SelectItem value="anualPlus">Anual Plus</SelectItem> */}
                 {datainput.map((item) => (
-                  <SelectItem value={item.id}>{item.name}</SelectItem>
+                  <SelectItem value={item.id} key={item.id}>
+                    {item.name}
+                  </SelectItem>
                 ))}
               </SelectContent>
             </Select>
@@ -144,7 +161,7 @@ const CreateStudent = () => {
           </div>
 
           <Button type="submit" className="w-full mt-4 cursor-pointer">
-            Cadastrar
+            Confirmar edição
           </Button>
         </form>
       </div>
@@ -152,4 +169,4 @@ const CreateStudent = () => {
   );
 };
 
-export default CreateStudent;
+export default EditStudent;

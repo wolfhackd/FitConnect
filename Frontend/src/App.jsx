@@ -9,6 +9,7 @@ import StudentManager from "./pages/admin/StudentManager";
 import CreateStudent from "./pages/admin/CreateStudent";
 import PlanManager from "./pages/admin/PlanManager";
 import CreatePlan from "./pages/admin/CreatePlan";
+import EditStudent from "./pages/admin/EditStudent";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/alunos" element={<StudentManager />} />
           <Route path="/alunos/criar" element={<CreateStudent />} />
+          <Route path="/alunos/editar" element={<EditStudent />} />
           <Route path="/planos" element={<PlanManager />} />
           <Route path="/planos/criar" element={<CreatePlan />} />
         </Route>

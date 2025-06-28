@@ -145,7 +145,7 @@ const StudentManager = () => {
                   className={
                     "cursor-pointer hover:bg-[#1F2937] hover:text-white absolute top-2 left-2"
                   }
-                  onClick={() => handleClickEdit(user.id)}
+                  onClick={() => handleClickEdit(user)}
                 >
                   Editar
                 </Button>
