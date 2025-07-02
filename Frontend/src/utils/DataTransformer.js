@@ -8,7 +8,7 @@ export const DataTransformer = (date) => {
 
   return parsedDate.toLocaleDateString("pt-BR", {
     year: "numeric",
-    month: "long",
+    month: "numeric",
     day: "numeric",
   });
 };

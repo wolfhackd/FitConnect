@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import LayoutAdmin from "@/components/LayoutAdmin";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import axios from "axios";
 import { DataTransformer } from "@/utils/DataTransformer";
+import { Avatar } from "@radix-ui/react-avatar";
+import { AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { User } from "lucide-react";
+import { BirthDate } from "@/utils/BirthDate";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function StudentProfilePage() {
   const location = useLocation();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const user = location.state.user;
-  const [plan, setPlan] = useState(null);
-
-  const birthDate = DataTransformer(user.birth);
+  const [plan, setPlan] = useState({});
 
   useEffect(() => {
     const academyId = localStorage.getItem("academyId");
@@ -27,79 +29,113 @@ export default function StudentProfilePage() {
       .then((res) => {
         setPlan(res.data.plans[0]);
         // console.log(res?.data.plans[0].academia);
-        console.log(res?.data.plans[0]);
+        // console.log(res?.data.plans[0]);
       })
       .catch((err) => {
         toast.error(err.response?.data?.message);
       });
   }, [user.id]);
 
+  console.log(user);
   return (
     <LayoutAdmin>
       <Toaster />
-      <div className="mt-4">
-        <Card>
-          <CardContent>
-            <Tabs defaultValue="profile" className="w-full">
-              <TabsList>
-                <TabsTrigger className={"cursor-pointer"} value="profile">
-                  Perfil
-                </TabsTrigger>
-                <TabsTrigger className={"cursor-pointer"} value="plan">
-                  Plano
-                </TabsTrigger>
-              </TabsList>
-              <TabsContent value="profile">
-                <div className="grid grid-cols-2 gap-8">
-                  {/* <h1 className="underline text-xl">Informações pessoais</h1> */}
-                  <div>
-                    <h1 className="text-2xl font-bold">Perfil</h1>
-                    <h2>
-                      Nome: <span>{user.name}</span>
-                    </h2>
-                    <h2>
-                      CPF: <span>{user.cpf}</span>
-                    </h2>
-                    <h2>
-                      Data de Nascimento: <span>{birthDate}</span>
-                    </h2>
-                    <h2>
-                      Telefone: <span>{user.phone}</span>
-                    </h2>
-                  </div>
-                  <div>
-                    <h1 className="text-2xl font-bold">Observações</h1>
-                    <div className="flex items-center">
-                      {/* <p>{user.observations}</p> */}
-                      <p>Nenhuma observação</p>
-
-                      {/* Adicionar ao banco */}
-                    </div>
-                  </div>
-                  <div>
-                    <h1 className="text-2xl font-bold">Plano</h1>
-                    {plan ? (
-                      <>
-                        <div className="flex flex-col">
-                          <p>Nome: {plan.plano.name}</p>
-                          <p>Inicio: {DataTransformer(plan.inicio)}</p>
-                          <p>Fim: {DataTransformer(plan.fim)}</p>
-                          <p>Duração: {plan.plano.duration} dias</p>
-                        </div>
-                      </>
-                    ) : (
-                      <p>Nenhum plano</p>
-                    )}
-                    {/* <div className="flex items-center">{plan.plano.name}</div> */}
-                  </div>
-                </div>
-              </TabsContent>
-              <TabsContent value="plan">
-                <p>Plano</p>
-              </TabsContent>
-            </Tabs>
-          </CardContent>
-        </Card>
+      <div className="bg-white p-4 rounded-md mt-4 relative">
+        <div className="flex gap-2 items-center flex-1">
+          <Avatar>
+            <AvatarImage src={user.image} />
+            <AvatarFallback>
+              <User className="rounded-full size-16 bg-gray-200 text-gray-600" />
+            </AvatarFallback>
+          </Avatar>
+          <div className="flex flex-col">
+            <h2 className="text-[#EF4444] font-bold">{user.name}</h2>
+            <span>
+              {BirthDate(user.birth)} anos | CPF: {user.cpf}
+            </span>
+          </div>
+        </div>
+        <Button
+          variant={"outline"}
+          className={
+            "cursor-pointer text-[#EF4444] border-2 border-[#EF4444] hover:bg-[#EF4444] hover:text-white absolute top-2 right-4 rounded-none"
+          }
+          onClick={() => navigate("/alunos/editar", { state: { user } })}
+        >
+          Editar
+        </Button>
+        <Tabs defaultValue="geral" className={"mt-4"}>
+          <TabsList className="grid w-full grid-cols-4">
+            <TabsTrigger
+              className={
+                "cursor-pointer text-[#EF4444] data-[state=active]:bg-[#EF4444] data-[state=active]:text-white"
+              }
+              value="geral"
+            >
+              Informações do Aluno
+            </TabsTrigger>
+            <TabsTrigger
+              className={
+                "cursor-pointer text-[#EF4444] data-[state=active]:bg-[#EF4444] data-[state=active]:text-white"
+              }
+              value="treino"
+            >
+              Treino do Aluno
+            </TabsTrigger>
+            <TabsTrigger
+              className={
+                "cursor-pointer text-[#EF4444] data-[state=active]:bg-[#EF4444] data-[state=active]:text-white"
+              }
+              value="historico"
+            >
+              Historico de Atividades
+            </TabsTrigger>
+            <TabsTrigger
+              className={
+                "cursor-pointer text-[#EF4444] data-[state=active]:bg-[#EF4444] data-[state=active]:text-white"
+              }
+              value="avaliacao"
+            >
+              Avaliação Fisica
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="geral">
+            <div>
+              <h1 className="text-[#EF4444] font-bold text-2xl">
+                Informações do Aluno
+              </h1>
+              {/* Falta adicionar as informações do plano se for adicionar nesse tab */}
+              {/* Fazer um whats.me aq */}
+              <span>
+                Telefone:{" "}
+                <a
+                  href={`https://wa.me/${user.phone}`}
+                  target="_blank"
+                  className="underline"
+                >
+                  {user.phone}
+                </a>
+              </span>
+              <br />
+              <span>Nascimento: {DataTransformer(user.birth)}</span>
+              <br />
+              <span>Idade: {BirthDate(user.birth)} Anos</span>
+              <br />
+              <span>CPF: {user.cpf}</span>
+              <h1 className="text-[#EF4444] font-bold text-2xl">
+                Observações:
+              </h1>
+              <span>
+                {user.observations
+                  ? user.observations
+                  : "Nenhuma Observação registrada"}
+              </span>
+            </div>
+          </TabsContent>
+          <TabsContent value="treino"></TabsContent>
+          <TabsContent value="historico"></TabsContent>
+          <TabsContent value="avaliacao"></TabsContent>
+        </Tabs>
       </div>
     </LayoutAdmin>
   );
