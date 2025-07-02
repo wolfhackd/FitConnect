@@ -10,6 +10,7 @@ import CreateStudent from "./pages/admin/CreateStudent";
 import PlanManager from "./pages/admin/PlanManager";
 import CreatePlan from "./pages/admin/CreatePlan";
 import EditStudent from "./pages/admin/EditStudent";
+import StudentProfilePage from "./pages/admin/StudentProfilePage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/alunos" element={<StudentManager />} />
           <Route path="/alunos/criar" element={<CreateStudent />} />
           <Route path="/alunos/editar" element={<EditStudent />} />
+          <Route path="/alunos/detalhes" element={<StudentProfilePage />} />
           <Route path="/planos" element={<PlanManager />} />
           <Route path="/planos/criar" element={<CreatePlan />} />
         </Route>

@@ -21,7 +21,6 @@ const EditStudent = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const user = location.state.user;
-  // console.log(user);
 
   //Dados do formulário
   const [name, setName] = useState("");
@@ -37,7 +36,6 @@ const EditStudent = () => {
       setCpf(user.cpf);
       setBirth(user.birth);
       setPhone(user.phone);
-      //   setPlano(user.plano); é outra tabela
     }
   }, [user]);
 
@@ -53,7 +51,7 @@ const EditStudent = () => {
     axios
       .post("http://localhost:3000/plan/getPlanByUser", {
         id: user.id,
-        academyId: localStorage.getItem("academyId"),
+        academyId: academyId,
       })
       .then((res) => {
         setPlano(res.data.plans[0].plano.id);
@@ -79,16 +77,18 @@ const EditStudent = () => {
 
     const data = new Date(birth).toISOString();
 
-    console.log({
-      id,
-      name,
-      cpf,
-      birth: data,
-      phone,
-      academyId: localStorage.getItem("academyId"),
-      plano,
-    });
-    //falta termimnar isso
+    // console.log({
+    //   id,
+    //   name,
+    //   cpf,
+    //   birth: data,
+    //   phone,
+    //   academyId: localStorage.getItem("academyId"),
+    //   plano,
+    // });
+
+    //Observação é melhor criar um modal para confirmar a edição
+    //Criar uma pagina antes de editar mostrando algumas informações sobre o aluno como pagamento treino e etc
 
     axios
       .post("http://localhost:3000/student/update", {
@@ -100,7 +100,7 @@ const EditStudent = () => {
         academyId: localStorage.getItem("academyId"),
         plano,
       })
-      .then((res) => {
+      .then(() => {
         toast.success("Aluno atualizado com sucesso");
         navigate("/alunos");
       })

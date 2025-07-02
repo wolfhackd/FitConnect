@@ -85,8 +85,9 @@ const Home = () => {
         >
           <Navbar />
 
-          <div className=" flex flex-col items-center justify-center flex-1 text-white gap-6 z-10">
-            <h2 className=" font-bold text-7xl md:text-9xl">FitConnect</h2>
+          <div className="flex flex-col items-center justify-center flex-1 text-white gap-6 z-10">
+            <h2 className="font-bold text-7xl md:text-9xl">FitConnect</h2>
+
             <p className="font-semibold text-2xl">
               Gerencie sua academia com agilidade e segurança.
             </p>

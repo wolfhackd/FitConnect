@@ -68,6 +68,8 @@ const StudentManager = () => {
       userType: 0,
     };
 
+    //Criar uma pagina antes de editar mostrando algumas informações sobre o aluno como pagamento treino e etc
+
     axios
       .post("http://localhost:3000/academy/listusers", payload, {
         withCredentials: true,
@@ -85,7 +87,7 @@ const StudentManager = () => {
   }, []);
 
   function handleClickEdit(user) {
-    navigate("/alunos/editar", { state: { user } });
+    navigate("/alunos/detalhes", { state: { user } });
     //Tá faltando terminar (Só tem essa parte feita, falta o restante)
   }
 
@@ -146,7 +148,7 @@ const StudentManager = () => {
                   }
                   onClick={() => handleClickEdit(user)}
                 >
-                  Editar
+                  Mostrar
                 </Button>
                 <span
                   className={`absolute top-2 right-2 px-2 py-1 text-xs rounded-full font-medium ${
