@@ -6,6 +6,8 @@ const planRoutes = require("./src/routes/plan/index.js");
 const studentRoutes = require("./src/routes/student/index.js");
 const adminRoutes = require("./src/routes/admin/index.js");
 const cors = require("cors");
+const authMiddleware = require("./src/middleware/auth.js");
+const typeOfUser = require("./src/middleware/typeOfUser.js");
 const app = express();
 
 app.use(cookieParser());
@@ -17,7 +19,9 @@ app.use(
   })
 );
 
-app.use("/academy", academyRoutes); //Funcionando
+//Falta passar os middlewares
+
+app.use("/academy", academyRoutes); //Funcionando //List acaddemy tem type of user 0
 app.use("/auth", loginRoutes); //Funcionando
 app.use("/plan", planRoutes); //Funcionando
 app.use("/student", studentRoutes); //Funcionando

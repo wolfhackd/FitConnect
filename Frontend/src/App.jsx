@@ -14,6 +14,7 @@ import StudentProfilePage from "./pages/admin/StudentProfilePage";
 
 function App() {
   return (
+    //Testar pra vê se meu middleware no backend funciona e se preciso mandar as credenciais em cada requisição axios
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />

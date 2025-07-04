@@ -9,9 +9,8 @@ const prisma = new PrismaClient();
 
 router.get("/list", listAcademy);
 //admin
-// router.post("/create",authMiddleware, typeOfUser(1) ,createAcademy);
-router.post("/create", createAcademy);
+router.post("/create", authMiddleware, typeOfUser(1), createAcademy);
 //users
-router.post("/listusers", authMiddleware, typeOfUser(1), listUsers);
+router.post("/listusers", listUsers);
 
 module.exports = router;

@@ -4,7 +4,7 @@ import UserMenu from "./UserMenu";
 
 const LayoutAdmin = ({ children }) => {
   return (
-    <div className="flex w-screen">
+    <div className="flex w-full overflow-x-hidden">
       <Sidebar />
       <main className="flex-1 bg-[#E5E7EB] p-8">
         <UserMenu />

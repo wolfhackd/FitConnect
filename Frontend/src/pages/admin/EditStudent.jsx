@@ -77,16 +77,6 @@ const EditStudent = () => {
 
     const data = new Date(birth).toISOString();
 
-    // console.log({
-    //   id,
-    //   name,
-    //   cpf,
-    //   birth: data,
-    //   phone,
-    //   academyId: localStorage.getItem("academyId"),
-    //   plano,
-    // });
-
     //Observação é melhor criar um modal para confirmar a edição
     //Criar uma pagina antes de editar mostrando algumas informações sobre o aluno como pagamento treino e etc
 

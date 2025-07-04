@@ -160,9 +160,6 @@ const StudentManager = () => {
                   {user.status ? "Ativo" : "Inativo"}
                 </span>
                 <CardHeader className={"justify-center"}>
-                  {/* <CardAction>
-                    {user.status == true ? "Ativo" : "Inativo"}
-                  </CardAction> */}
                   <CardTitle>
                     <Avatar>
                       <AvatarImage
